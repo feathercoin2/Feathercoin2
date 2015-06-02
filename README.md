@@ -10,4 +10,4 @@
 </ul>
 
 <h1>Official Wesbite and Downloads</h1>
-<p><a href="https://www.feathercoin2.com/">https://www.feathercoin2.com/</a></p>
+<p><a href="http://www.feathercoin2.com/">http://www.feathercoin2.com/</a></p>
