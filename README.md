@@ -8,3 +8,6 @@
 <li>Subsidy halves every ~4 years</li>
 <li>~336 million total coins</li>
 </ul>
+
+<h1>Official Wesbite and Downloads</h1>
+<p><a href="https://www.feathercoin2.com/">https://www.feathercoin2.com/</a></p>
