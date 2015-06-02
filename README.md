@@ -1,11 +1,10 @@
-Feathercoin
-1 minute block targets
-80 coins per block
-NeoScrypt hashing algorithm
-Retarget every block
-Retarget with average of 15, 120 and 480 block averages and .25 damping
-Subsidy halves every ~4 years
-~336 million total coins
-
-Official Wesbite and Downloads
-https://www.feathercoin2.com/
+<h1>Feathercoin</h1>
+<ul>
+<li>1 minute block targets</li>
+<li>80 coins per block</li>
+<li>NeoScrypt hashing algorithm</li>
+<li>Retarget every block</li>
+<li>Retarget with average of 15, 120 and 480 block averages and .25 damping</li>
+<li>Subsidy halves every ~4 years</li>
+<li>~336 million total coins</li>
+</ul>
