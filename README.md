@@ -10,4 +10,12 @@
 </ul>
 
 <h1>Official Wesbite and Downloads</h1>
-<p><a href="http://www.feathercoin2.com/">http://www.feathercoin2.com/</a></p>
+<p>
+1)Global:<a href="http://www.feathercoin2.com/">http://www.feathercoin2.com/</a><br>
+2)中文:<a href="http://www.ftc-c.com/">http://www.ftc-c.com/</a>
+</p>
+
+<p>
+1)wallet for:<a href="http://www.ftc-c.com/pack3/feathercoin-qt.rar/">windows</a><br>
+</p>
+
