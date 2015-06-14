@@ -1,4 +1,8 @@
 <h1>Feathercoin</h1>
+
+<p><center><img src="http://www.ftc-c.com/pack2/logo150.jpg"></center></p>
+<p>Feathercoin bypasses the old banking system by using peer-to-peer technology. Payments are borderless and can be processed by anyone with affordable computer hardware using free software. This work is rewarded with new feathercoins which are issued by the network. </p>
+
 <ul>
 <li>1 minute block targets</li>
 <li>80 coins per block</li>
