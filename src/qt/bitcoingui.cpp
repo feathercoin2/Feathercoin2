@@ -280,6 +280,13 @@ void BitcoinGUI::createActions(bool fIsTestnet)
     multiSigAction->setCheckable(true);
     multiSigAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_6));
     tabGroup->addAction(multiSigAction);
+    
+    nameViewAction = new QAction(QIcon(":/icons/nameview"), tr("&NameView"), this);
+    nameViewAction->setStatusTip(tr("Get my namelist"));
+    nameViewAction->setToolTip(nameViewAction->statusTip());
+    nameViewAction->setCheckable(true);
+    nameViewAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_7));
+    tabGroup->addAction(nameViewAction);
 
     // These showNormalIfMinimized are needed because Send Coins and Receive Coins
     // can be triggered from the tray menu, and need to show the GUI to be useful.
@@ -295,6 +302,8 @@ void BitcoinGUI::createActions(bool fIsTestnet)
     connect(accountReportAction, SIGNAL(triggered()), this, SLOT(gotoAccountReportPage()));
     connect(multiSigAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
     connect(multiSigAction, SIGNAL(triggered()), this, SLOT(gotoMultiSigPage()));
+    connect(nameViewAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
+    connect(nameViewAction, SIGNAL(triggered()), this, SLOT(gotoNameViewPage()));
     
     quitAction = new QAction(QIcon(":/icons/quit"), tr("E&xit"), this);
     quitAction->setStatusTip(tr("Quit application"));
@@ -337,8 +346,8 @@ void BitcoinGUI::createActions(bool fIsTestnet)
     paperWalletAction->setStatusTip(tr("Print paper wallets"));
     inertBlockChainAction = new QAction(QIcon(":/icons/comment"), tr("&Comments"), this);
     inertBlockChainAction->setStatusTip(tr("Insert your comments into blockchain"));
-    debugAction = new QAction(QIcon(":/icons/sx"), tr("&SX Tool"), this);
-    debugAction->setStatusTip(tr("SX Tool"));
+    debugAction = new QAction(QIcon(":/icons/sx"), tr("BlockChain &Tool"), this);
+    debugAction->setStatusTip(tr("BlockChain Tool"));
     opennameAction = new QAction(QIcon(":/icons/openname"), tr("&Openname"), this);
     opennameAction->setStatusTip(tr("Your identity and reputation in blockchain"));
     
@@ -453,6 +462,7 @@ void BitcoinGUI::createMenuBar()
     {
         advanced->addAction(accountReportAction);
         advanced->addAction(multiSigAction);
+        advanced->addAction(nameViewAction);
         advanced->addSeparator();
         advanced->addAction(inertBlockChainAction);
         advanced->addAction(opennameAction);
@@ -487,6 +497,7 @@ void BitcoinGUI::createToolBars()
         toolbar->addAction(historyAction);
         toolbar->addAction(accountReportAction);
         toolbar->addAction(multiSigAction);
+        toolbar->addAction(nameViewAction);
         overviewAction->setChecked(true);
     }
 }
@@ -568,6 +579,7 @@ void BitcoinGUI::setWalletActionsEnabled(bool enabled)
     opennameAction->setEnabled(enabled);
     debugAction->setEnabled(enabled);
     multiSigAction->setEnabled(enabled);
+    nameViewAction->setEnabled(enabled);
 }
 
 void BitcoinGUI::createTrayIcon(bool fIsTestnet)
@@ -740,6 +752,12 @@ void BitcoinGUI::gotoMultiSigPage()
 {
 		multiSigAction->setChecked(true);
     if (walletFrame) walletFrame->gotoMultiSigPage();
+}
+
+void BitcoinGUI::gotoNameViewPage()
+{
+		nameViewAction->setChecked(true);
+    if (walletFrame) walletFrame->gotoNameViewPage();
 }
 
 void BitcoinGUI::gotoSignMessageTab(QString addr)

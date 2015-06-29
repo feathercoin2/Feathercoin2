@@ -65,6 +65,8 @@ public slots:
     void gotoAccountReportPage();
     /** Switch to multisig page */
     void gotoMultiSigPage();
+    /** Switch to name view page */
+    void gotoNameViewPage();
     
     /** Encrypt the wallet */
     void encryptWallet(bool status);

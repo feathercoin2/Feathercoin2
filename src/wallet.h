@@ -291,6 +291,9 @@ public:
     bool SendStealthMoneyToDestination(CStealthAddress& sxAddress, int64_t nValue, CWalletTx& wtxNew, std::string& sError, bool fAskFee=false);
     bool FindStealthTransactions(const CTransaction& tx);
     
+    bool ScanForOpenNameTransactions(const uint256 &hash, const CTransaction& tx, const CBlock* pblock, bool fUpdate);
+    bool FindOpennameTransactions(const CTransaction& tx,int BlockHeight,unsigned int nTime);
+    
     
     bool NewKeyPool();
     bool TopUpKeyPool(unsigned int kpSize = 0);

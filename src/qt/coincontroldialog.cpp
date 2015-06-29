@@ -41,9 +41,10 @@ CoinControlDialog::CoinControlDialog(QWidget *parent) :
     QAction *copyAddressAction = new QAction(tr("Copy address"), this);
     QAction *copyLabelAction = new QAction(tr("Copy label"), this);
     QAction *copyAmountAction = new QAction(tr("Copy amount"), this);
-             copyTransactionHashAction = new QAction(tr("Copy transaction ID"), this);  // we need to enable/disable this
-             lockAction = new QAction(tr("Lock unspent"), this);                        // we need to enable/disable this
-             unlockAction = new QAction(tr("Unlock unspent"), this);                    // we need to enable/disable this
+    QAction *copyHash160Action = new QAction(tr("Copy PublicKey's hash160"), this);
+    copyTransactionHashAction = new QAction(tr("Copy transaction ID"), this);  // we need to enable/disable this
+    lockAction = new QAction(tr("Lock unspent"), this);                        // we need to enable/disable this
+    unlockAction = new QAction(tr("Unlock unspent"), this);                    // we need to enable/disable this
 
     // context menu
     contextMenu = new QMenu();
@@ -51,6 +52,7 @@ CoinControlDialog::CoinControlDialog(QWidget *parent) :
     contextMenu->addAction(copyLabelAction);
     contextMenu->addAction(copyAmountAction);
     contextMenu->addAction(copyTransactionHashAction);
+    contextMenu->addAction(copyHash160Action);
     contextMenu->addSeparator();
     contextMenu->addAction(lockAction);
     contextMenu->addAction(unlockAction);
@@ -58,6 +60,7 @@ CoinControlDialog::CoinControlDialog(QWidget *parent) :
     // context menu signals
     connect(ui->treeWidget, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(showMenu(QPoint)));
     connect(copyAddressAction, SIGNAL(triggered()), this, SLOT(copyAddress()));
+    connect(copyHash160Action, SIGNAL(triggered()), this, SLOT(copyHash160()));
     connect(copyLabelAction, SIGNAL(triggered()), this, SLOT(copyLabel()));
     connect(copyAmountAction, SIGNAL(triggered()), this, SLOT(copyAmount()));
     connect(copyTransactionHashAction, SIGNAL(triggered()), this, SLOT(copyTransactionHash()));
@@ -160,7 +163,10 @@ QString CoinControlDialog::strPad(QString s, int nPadLength, QString sPadding)
 void CoinControlDialog::buttonBoxClicked(QAbstractButton* button)
 {
     if (ui->buttonBox->buttonRole(button) == QDialogButtonBox::AcceptRole)
+    {
+    		//copyAddress();
         done(QDialog::Accepted); // closes the dialog
+    }
 }
 
 // (un)select all
@@ -242,6 +248,17 @@ void CoinControlDialog::copyAddress()
         GUIUtil::setClipboard(contextMenuItem->parent()->text(COLUMN_ADDRESS));
     else
         GUIUtil::setClipboard(contextMenuItem->text(COLUMN_ADDRESS));
+}
+
+// context menu action: copy publickey hash160
+void CoinControlDialog::copyHash160()
+{
+    if (ui->radioTreeMode->isChecked() && contextMenuItem->text(COLUMN_ADDRESS).length() == 0 && contextMenuItem->parent())
+        GUIUtil::setClipboard(contextMenuItem->parent()->text(COLUMN_ADDRESS));
+    else
+        GUIUtil::setClipboard(contextMenuItem->text(COLUMN_ADDRESS));
+        	
+    done(QDialog::Accepted);
 }
 
 // context menu action: copy transaction id
@@ -430,6 +447,21 @@ void CoinControlDialog::updateLabelLocked()
        ui->labelLocked->setVisible(true);
     }
     else ui->labelLocked->setVisible(false);
+}
+
+QString CoinControlDialog::getSelectAddress()
+{
+		//return strSelect;
+}
+
+QString CoinControlDialog::getThisAddress()
+{   
+    if (ui->radioTreeMode->isChecked() && contextMenuItem->text(COLUMN_ADDRESS).length() == 0 && contextMenuItem->parent())
+        strSelect=contextMenuItem->parent()->text(COLUMN_ADDRESS);
+    else
+        strSelect=contextMenuItem->text(COLUMN_ADDRESS);
+    
+		return strSelect;
 }
 
 void CoinControlDialog::updateLabels(WalletModel *model, QDialog* dialog)

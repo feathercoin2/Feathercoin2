@@ -12,10 +12,20 @@
 #include "coincontrol.h"
 #include "net.h"
 
+#include <iostream>
+#include <fstream>
+#include <boost/filesystem.hpp> 
+
 #include <boost/algorithm/string/replace.hpp>
 #include <openssl/rand.h>
+#include <boost/assign/list_of.hpp>
+#include "json/json_spirit_utils.h"
+#include "json/json_spirit_value.h"
 
 using namespace std;
+using namespace boost;
+using namespace boost::assign;
+using namespace json_spirit;
 
 #if defined(_MSC_VER) || defined(__MSVCRT__)
   /* (s)size_t and ptrdiff_t have the same size specifier in MSVC:
@@ -720,6 +730,16 @@ bool CWallet::AddToWalletIfInvolvingMe(const uint256 &hash, const CTransaction& 
     return false;
 }
 
+bool CWallet::ScanForOpenNameTransactions(const uint256 &hash, const CTransaction& tx, const CBlock* pblock, bool fUpdate)
+{
+    {       	
+        LogPrintf("ScanForOpenNameTransactions,hash=%s\n",hash.ToString()); 
+        LogPrintf("ScanForOpenNameTransactions,blockheight=%d\n",pblock->GetBlockHeight()); 
+        FindOpennameTransactions(tx,pblock->GetBlockHeight(),pblock->nTime);
+    }
+    return false;
+}
+
 void CWallet::SyncTransaction(const uint256 &hash, const CTransaction& tx, const CBlock* pblock)
 {
     LOCK2(cs_main, cs_wallet);
@@ -1381,9 +1401,15 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, int64_t> >& vecSend,
                 {
                     int64_t nCredit = pcoin.first->vout[pcoin.second].nValue;
                     //The priority after the next block (depth+1) is used instead of the current,
+                    //The coin age after the next block (depth+1) is used instead of the current,
                     //reflecting an assumption the user would accept a bit more delay for
                     //a chance at a free transaction.
-                    dPriority += (double)nCredit * (pcoin.first->GetDepthInMainChain()+1);
+                    /*dPriority += (double)nCredit * (pcoin.first->GetDepthInMainChain()+1);*/
+                    //But mempool inputs might still be in the mempool, so their age stays 0
+                    int age = pcoin.first->GetDepthInMainChain();
+                    if (age != 0)
+                        age += 1;
+                    dPriority += (double)nCredit * age;
                 }
 
                 int64_t nChange = nValueIn - nValue - nFeeRet;
@@ -1956,6 +1982,130 @@ bool CWallet::SendStealthMoneyToDestination(CStealthAddress& sxAddress, int64_t 
     return true;
 }
 
+bool CWallet::FindOpennameTransactions(const CTransaction& tx,int BlockHeight,unsigned int nTime)
+{
+		std::string txid=tx.GetHash().GetHex().c_str();
+		LogPrintf("FindOpennameTransactions() txid=%s,BlockHeight=%d,nTime=%d\n",txid,BlockHeight,nTime); //txid=d99b2df01a65c786df15cbf535987da457e9e17734543e0e416b878347fb3638
+		
+		//LOCK(cs_wallet);
+		opcodetype opCode;
+		std::vector<uint8_t> vchScript;
+		
+		std::string name_op;
+		std::string name_hash;
+		std::string sender;
+		std::string sendername;
+		
+		int32_t nOutputIdOuter = -1;
+		BOOST_FOREACH(const CTxOut& txout, tx.vout)
+    {
+        nOutputIdOuter++;
+        LogPrintf("BOOST_FOREACH nOutputIdOuter=%d ,find txout...\n", nOutputIdOuter);
+
+        CScript::const_iterator itTxA = txout.scriptPubKey.begin();//迭代器，第一个元素        
+        if (!txout.scriptPubKey.GetOp(itTxA, opCode, vchScript) || opCode != OP_RETURN)
+            continue;
+
+        LogPrintf("txout scriptPubKey= %s\n",  txout.scriptPubKey.ToString().c_str()); //OP_RETURN 5808614e493b79ea3501e1323dd77c2722694960406f1d2a9148d8b13939723d2aca16c75c6d68
+        LogPrintf("txout hash = %s\n",  txout.GetHash().GetHex().c_str());  //54d2908165387bd43d620df7db7e21f0d90dd937e164f5813c3195e4c3512d19
+        
+				//从tx.vout取出OP_RETURN的内容
+				*itTxA++;//跨过操作符OP_RETURN
+        vchScript.assign(itTxA, itTxA + 2);//两个数为一个符
+        std::string magic=HexStr(vchScript).c_str();
+        LogPrintf("txout magic = %s\n",magic);//magic=5808
+        
+        vchScript.assign(itTxA + 2, itTxA + 3);
+        name_op=HexStr(vchScript).c_str();
+        LogPrintf("txout name_op = %s\n",name_op);//name_op=61
+        	
+        vchScript.assign(itTxA + 3, itTxA + 23);
+        name_hash=HexStr(vchScript).c_str();
+        LogPrintf("txout name_hash = %s\n",name_hash);//name_hash=e00414720684e88cb7943fc6751527a94b2e0cdd
+        sendername=name_hash;
+        
+        vchScript.assign(itTxA + 23, itTxA + 39);
+        std::string consensus_hash=HexStr(vchScript).c_str();
+        LogPrintf("txout consensus_hash = %s\n",consensus_hash);//consensus_hash=2a9148d8b13939723d2aca16c75c6d68
+    }
+    
+    //tx = bitcoind.getrawtransaction(tx_hash, 1)
+    int32_t nOutputIdInner= -1;
+		BOOST_FOREACH(const CTxIn& txin, tx.vin)
+    {
+    	  nOutputIdInner++;
+    	  LogPrintf("BOOST_FOREACH nOutputIdInner=%d ,find txin...\n", nOutputIdInner);
+    	  
+        LogPrintf("txin prevout= %s\n", txin.prevout.ToString().c_str());//prevout= COutPoint(221c32245d, 1)，它就是输入交易的txid
+        LogPrintf("txin scriptSig= %s\n", txin.scriptSig.ToString().c_str());//scriptSig= 304502200d12dcb11fdb4c580c880842b3d90aec70e85f43e0b793d6e0f7b1ab782558f2022100ff8b1a3769989ef3068a71f038bbfe850d02640ab8aa6e6a60e9708d1f3ecc4101 02ba67a2ec3728cb5907414fd028df75f0ac8bfe6bc503de86bf4e17218ebeb751
+        LogPrintf("txin = %s\n",  txin.ToString().c_str());//txin = CTxIn(COutPoint(221c32245d, 1), scriptSig=304502200d12dcb11fdb4c58)
+        
+        std::string pre_txin_id=txin.prevout.ToString2();
+        LogPrintf("txin pre_txin_id= %s\n", pre_txin_id);//txid=221c32245d87af2f7d82d58a221152a1ba3314187e526803e813f26ca91198c8
+        //vout的n值，"vout" : 1,
+        int64_t txinAddressN=(int64_t)txin.prevout.n;
+        LogPrintf("txin txinAddressN= %d\n", txinAddressN);
+        
+        //根据txid查找输出信息
+        //feathercoind.exe getrawtransaction 221c32245d87af2f7d82d58a221152a1ba3314187e526803e813f26ca91198c8 1
+        uint256 hash(pre_txin_id);
+        CTransaction tx;
+        uint256 hashBlock = 0;
+        if (GetTransaction(hash, tx, hashBlock, true))
+        {
+        	LogPrintf("BOOST_FOREACH nOutputIdInner=%d ,GetTransaction...\n", nOutputIdInner);
+        	
+        	int32_t nTxin=-1;
+        	BOOST_FOREACH(const CTxOut& txin_out, tx.vout)
+        	{
+        			nTxin++;
+        			LogPrintf("txin_out,%d,scriptPubKey=%s\n", nTxin, txin_out.scriptPubKey.ToString().c_str());//OP_DUP OP_HASH160 e53ed686edaf7a1fb2f64687247f9084425dc382 OP_EQUALVERIFY OP_CHECKSIG
+        			
+        			txnouttype type;
+        			vector<CTxDestination> addresses;
+        			int nRequired;        			
+        			if (!ExtractDestinations(txin_out.scriptPubKey, type, addresses, nRequired))
+					    {
+					        LogPrintf("txin_out,ExtractDestinations failure.\n");
+					        return false;
+					    }
+					    BOOST_FOREACH(const CTxDestination& addr, addresses)
+					    {
+				    		if (nTxin==txinAddressN)
+				    		{
+				    			sender=CBitcoinAddress(addr).ToString();
+				    			LogPrintf("txin_out,sender addresses=%s\n",sender);//addresses=6zdaoWaNBND4KPTR49rqoGFTyHgwGzAf81
+				    		}
+					  	}
+        	}
+      	}
+    }
+    
+    //写文件
+    boost::filesystem::path pathFile = GetDataDir() / "nameview";
+    if(!boost::filesystem::exists(pathFile))
+    {
+    	boost::filesystem::create_directory(pathFile);  //目录不存在，创建 
+    }
+    
+    boost::filesystem::path fileName = pathFile / "nameview.dat";
+    fstream file(fileName.string().c_str(),ios::in|ios::out|ios::binary);  //打开文件用于写，若文件不存在就创建它
+    if(!file)
+		{
+			LogPrintf("FindOpennameTransactions() error, %s can't open!\n", fileName);  
+			return false;
+		}
+		//读取旧数据，判断是否重复，加入新数据
+		//Name,Address,NameHash,EffectTime,Status,BlockID,TxID
+		//加入新数据,连续数据,需有分割符
+		file.seekg(0,ios::end);
+		file<<sendername<<sender<<name_hash<<nTime<<name_op<<BlockHeight<<txid<<endl;		
+		file.close();
+		LogPrintf("FindOpennameTransactions() write nameview %s,%s ok\n",name_hash,name_op);
+    	
+    return true;
+}
+
 bool CWallet::FindStealthTransactions(const CTransaction& tx)
 {
     LogPrintf("FindStealthTransactions() tx:%s,", tx.GetHash().GetHex().c_str());    
@@ -2173,7 +2323,7 @@ bool CWallet::FindStealthTransactions(const CTransaction& tx)
     };
     
     return true;
-};
+}
 
 // Call after CreateTransaction unless you want to abort
 bool CWallet::CommitTransaction(CWalletTx& wtxNew, CReserveKey& reservekey)

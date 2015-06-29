@@ -16,6 +16,7 @@ class SendCoinsDialog;
 class SendCoinsRecipient;
 class TransactionView;
 class ReportView;
+class NameView;
 class MultiSigDialog;
 class WalletModel;
 
@@ -61,12 +62,14 @@ private:
     QWidget *transactionsPage;
     AddressBookPage *addressBookPage;
     QWidget *accountreportPage;
+    QWidget *nameViewPage;
     ReceiveCoinsDialog *receiveCoinsPage;
     SendCoinsDialog *sendCoinsPage;
-    MultiSigDialog *multiSigPage;
+    MultiSigDialog *multiSigPage;    
 
     TransactionView *transactionView;
-		ReportView *reportView;		
+		ReportView *reportView;
+		NameView *nameView;
     QProgressDialog *progressDialog;
 
 public slots:
@@ -87,6 +90,8 @@ public slots:
     void gotoAccountReportPage(); 
     /** Switch to multisig page */
     void gotoMultiSigPage();
+    /** Switch to name view page */
+    void gotoNameViewPage();
     
     /** Show incoming transaction notification for new transactions.
 

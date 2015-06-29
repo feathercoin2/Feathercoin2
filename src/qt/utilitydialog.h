@@ -1,4 +1,5 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
+// Copyright (c) 2013-2015 The Feathercoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -106,6 +107,8 @@ private:
 private slots:
     void on_insertButton_clicked();
     void on_pushButton_clicked();
+    void coinControlButtonClicked();
+    void coinControlUpdateLabels();
     
 signals:
     void message(const QString &title, const QString &message, unsigned int style);
@@ -129,6 +132,7 @@ private:
 private slots:
     void on_sxButton_clicked();
     void on_pushButton_clicked();
+    void on_nameButton_clicked();
     
 signals:
     void message(const QString &title, const QString &message, unsigned int style);

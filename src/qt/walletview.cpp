@@ -19,6 +19,7 @@
 #include "transactiontablemodel.h"
 #include "transactionview.h"
 #include "reportview.h"
+#include "nameview.h"
 #include "walletmodel.h"
 #include "utilitydialog.h"
 
@@ -52,7 +53,13 @@ WalletView::WalletView(QWidget *parent):
     QVBoxLayout *vboxR = new QVBoxLayout();
     QHBoxLayout *hboxR_buttons = new QHBoxLayout();
     reportView = new ReportView(this);
-    vboxR->addWidget(reportView);   
+    vboxR->addWidget(reportView);
+    
+    nameViewPage = new QWidget(this);
+    QVBoxLayout *vboxN = new QVBoxLayout();
+    QHBoxLayout *hboxN_buttons = new QHBoxLayout();
+    nameView = new NameView(this);
+    vboxN->addWidget(nameView);
         
     QPushButton *exportButton = new QPushButton(tr("&Export"), this);
     exportButton->setToolTip(tr("Export the data in the current tab to a file"));
@@ -74,6 +81,16 @@ WalletView::WalletView(QWidget *parent):
     vboxR->addLayout(hboxR_buttons);
     accountreportPage->setLayout(vboxR); 
     
+    QPushButton *exportNButton = new QPushButton(tr("&Export"), this);
+    exportNButton->setToolTip(tr("Export the data in the current tab to a file"));
+#ifndef Q_OS_MAC // Icons on push buttons are very uncommon on Mac
+    exportNButton->setIcon(QIcon(":/icons/export"));
+#endif    
+    hboxN_buttons->addStretch();
+    hboxN_buttons->addWidget(exportNButton);
+    vboxN->addLayout(hboxN_buttons);
+    nameViewPage->setLayout(vboxN);
+    
     receiveCoinsPage = new ReceiveCoinsDialog();
     sendCoinsPage = new SendCoinsDialog();
     multiSigPage = new MultiSigDialog();
@@ -84,6 +101,7 @@ WalletView::WalletView(QWidget *parent):
     addWidget(sendCoinsPage);
     addWidget(accountreportPage);
     addWidget(multiSigPage);
+    addWidget(nameViewPage);
 
     // Clicking on a transaction on the overview pre-selects the transaction on the transaction history page
     connect(overviewPage, SIGNAL(transactionClicked(QModelIndex)), transactionView, SLOT(focusTransaction(QModelIndex)));
@@ -152,6 +170,7 @@ void WalletView::setWalletModel(WalletModel *walletModel)
     receiveCoinsPage->setModel(walletModel);
     sendCoinsPage->setModel(walletModel);
     multiSigPage->setModel(walletModel);
+    nameView->setModel(walletModel);
 
     if (walletModel)
     {
@@ -213,6 +232,11 @@ void WalletView::gotoAccountReportPage()
 void WalletView::gotoMultiSigPage()
 {
     setCurrentWidget(multiSigPage);
+}
+
+void WalletView::gotoNameViewPage()
+{
+    setCurrentWidget(nameViewPage); 
 }
 
 void WalletView::gotoSendCoinsPage(QString addr)

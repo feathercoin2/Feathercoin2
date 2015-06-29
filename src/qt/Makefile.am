@@ -163,6 +163,7 @@ QT_MOC_CPP = \
   moc_snapwidget.cpp \
   moc_verticallabel.cpp \
   moc_reportview.cpp \
+  moc_nameview.cpp \
   moc_createmultisigaddrdialog.cpp \
   moc_multisigdialog.cpp
 
@@ -239,6 +240,7 @@ BITCOIN_QT_H = \
   qimagesource.h \
   verticallabel.h \
   reportview.h \
+  nameview.h \
   createmultisigaddrdialog.h \
   multisigdialog.h
 
@@ -354,6 +356,7 @@ BITCOIN_QT_CPP += \
   walletmodeltransaction.cpp \
   walletview.cpp \
   reportview.cpp \
+  nameview.cpp \
   snapwidget.cpp \
   verticallabel.cpp \
   qimagesource.cpp \

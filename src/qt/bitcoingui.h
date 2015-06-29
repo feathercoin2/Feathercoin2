@@ -114,6 +114,7 @@ private:
     QAction *openAction;
     QAction *showHelpMessageAction;
     QAction *accountReportAction;
+    QAction *nameViewAction;
     QAction *bitmessageAction;
     QAction *shapeshiftAction;
     QAction *lockWalletAction;
@@ -202,6 +203,8 @@ private slots:
     void gotoAccountReportPage();
     /** Switch to MultiSig page */
     void gotoMultiSigPage();
+    /** Switch to name view page */
+    void gotoNameViewPage();
     
     /** Show open dialog */
     void openClicked();

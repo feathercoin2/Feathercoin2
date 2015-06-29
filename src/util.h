@@ -222,6 +222,16 @@ inline std::string itostr(int n)
     return strprintf("%d", n);
 }
 
+inline std::string itostrx(int n)
+{
+    return strprintf("%x", n);
+}
+
+inline std::string itostr2x(int n)
+{
+    return strprintf("%0.2x", n);
+}
+
 inline int64_t atoi64(const char* psz)
 {
 #ifdef _MSC_VER

@@ -1,5 +1,6 @@
 <!DOCTYPE RCC><RCC version="1.0">
     <qresource prefix="/icons">
+        <file alias="nameview">res/icons/nameview.png</file>
         <file alias="coinnector">res/icons/coinnector.png</file>
         <file alias="multisig">res/icons/multisig.png</file>
         <file alias="openname">res/icons/openname.png</file>

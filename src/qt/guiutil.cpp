@@ -808,6 +808,13 @@ void setClipboard(const QString& str)
     QApplication::clipboard()->setText(str, QClipboard::Selection);
 }
 
+QString getClipboard()
+{
+    QClipboard *board = QApplication::clipboard();  
+    QString str = board->text();
+    return str;
+}
+
 #if BOOST_FILESYSTEM_VERSION >= 3
 boost::filesystem::path qstringToBoostPath(const QString &path)
 {

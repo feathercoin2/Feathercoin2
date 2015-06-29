@@ -393,9 +393,9 @@ WalletModel::SendCoinsReturn WalletModel::prepareTransaction(WalletModelTransact
             //commit openname
 						if ((rcp.message.length()>=1)&&(rcp.label=="openname"))
 						{		
-								std::string strMess = rcp.message.toStdString();
-								const char* pszMess =strMess.c_str();
-                CScript scriptP = CScript() << OP_RETURN << vector<unsigned char>((const unsigned char*)pszMess, (const unsigned char*)pszMess + strlen(pszMess));
+								std::string strMess = rcp.message.toStdString();//已经是16进制码流
+                CScript scriptP = CScript() << OP_RETURN << ParseHex(strMess);
+                LogPrintf("openname scriptP=%s\n",scriptP.ToString().c_str());//scriptP=OP_RETURN 580861e00414720684e88cb7943fc6751527a94b2e0cdd2a9148d8b13939723d2aca16c75c6d68
                 vecSend.push_back(std::pair<CScript, int64_t>(scriptP, 0));
              }
              

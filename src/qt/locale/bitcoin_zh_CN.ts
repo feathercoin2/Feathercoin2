@@ -715,6 +715,10 @@
         <source>Shapeshift...</source>
         <translation>币变身</translation>
     </message>
+     <message>
+        <source>Coinnector...</source>
+        <translation>币币兑换</translation>
+    </message>
     <message>
         <source>&amp;Lock wallet</source>
         <translation>锁定钱包</translation>
@@ -740,12 +744,20 @@
         <translation>多重签名</translation>
     </message>
     <message>
+        <source>&amp;NameView</source>
+        <translation>身份记录</translation>
+    </message>
+    <message>
+        <source>NameView</source>
+        <translation>身份记录</translation>
+    </message>
+    <message>
         <source>Insert your comments into blockchain</source>
         <translation>向区块链内写入留言</translation>
     </message>
     <message>
-        <source>&amp;SX Tool</source>
-        <translation>隐身交易助手</translation>
+        <source>BlockChain &amp;Tool</source>
+        <translation>区块链助手</translation>
     </message>
     <message>
         <source>&amp;MerchantList</source>
@@ -1282,6 +1294,10 @@ Address: %4
 <context>
     <name>DebugDialog</name>
     <message>
+        <source>Debug Dialog (experts only!)</source>
+        <translation>调试工具（仅专家）</translation>
+    </message>
+    <message>
         <source>Exit</source>
         <translation>关闭</translation>
     </message>
@@ -1321,6 +1337,14 @@ Address: %4
         <source>Scan Stealth Transactions</source>
         <translation>开始扫描隐身交易</translation>
     </message>
+    <message>
+        <source>Scan Openname Transactions From Height:</source>
+        <translation>在块链中查找我的名字交易，从开始块号</translation>
+    </message>
+    <message>
+        <source>Scan Openname Transactions</source>
+        <translation>开始扫描名字交易</translation>
+    </message>
 </context>
 <context>
     <name>OpennameDialog</name>
@@ -1345,7 +1369,7 @@ Address: %4
         <translation>钱包警告</translation>
     </message>
     <message>
-        <source>Notice:All of the information can not be more than 40 characters.</source>
+        <source>Notice:Your name can not be more than 40 characters.</source>
         <translation>注意：所有的信息合计长度不能超过40个字符！</translation>
     </message>
     <message>
@@ -1365,8 +1389,8 @@ Address: %4
         <translation>向区块链插入你的Openname</translation>
     </message>
     <message>
-        <source>Commit into BlockChain</source>
-        <translation>提交至区块链</translation>
+        <source>Broadcast into BlockChain</source>
+        <translation>发送区块链广播</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -1383,6 +1407,34 @@ Address: %4
     <message>
         <source>Exit</source>
         <translation>退出</translation>
+    </message>
+    <message>
+        <source>Inputs...</source>
+        <translation>选择地址</translation>
+    </message>
+    <message>
+        <source>Operations:</source>
+        <translation>操作</translation>
+    </message>
+    <message>
+        <source>NAME_PREORDER</source>
+        <translation>名字预订</translation>
+    </message>
+    <message>
+        <source>NAME_REGISTRATION</source>
+        <translation>名字注册</translation>
+    </message>
+    <message>
+        <source>NAME_UPDATE</source>
+        <translation>名字更新</translation>
+    </message>
+    <message>
+        <source>NAME_TRANSFER</source>
+        <translation>名字转移</translation>
+    </message>
+    <message>
+        <source>NAME_RENEWAL</source>
+        <translation>名字重建</translation>
     </message>
 </context>
 <context>

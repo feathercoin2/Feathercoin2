@@ -28,11 +28,14 @@ public:
     explicit CoinControlDialog(QWidget *parent = 0);
     ~CoinControlDialog();
 
+		QString strSelect;
     void setModel(WalletModel *model);
+    QString getThisAddress();
 
     // static because also called from sendcoinsdialog
     static void updateLabels(WalletModel*, QDialog*);
     static QString getPriorityLabel(double);
+    static QString getSelectAddress();
 
     static QList<qint64> payAmounts;
     static CCoinControl *coinControl;
@@ -51,8 +54,8 @@ private:
 
     QString strPad(QString, int, QString);
     void sortView(int, Qt::SortOrder);
-    void updateView();
-
+    void updateView();    
+    
     enum
     {
         COLUMN_CHECKBOX,
@@ -99,6 +102,7 @@ private slots:
     void copyAmount();
     void copyLabel();
     void copyAddress();
+    void copyHash160();
     void copyTransactionHash();
     void lockCoin();
     void unlockCoin();
