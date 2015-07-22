@@ -17,10 +17,11 @@
 
 static const char* pszBase40 = "0123456789abcdefghijklmnopqrstuvwxyz-_.+";
 static const char* pszBase16 = "0123456789abcdef";
+static const std::string sepName = ",";
 
 
 //Turn a string into a non-negative integer.
-uint64_t charset_to_int(const unsigned char* pbegin, const unsigned char* pend)
+static uint64_t charset_to_int(const unsigned char* pbegin, const unsigned char* pend)
 {
 	uint64_t output = 0;
 	while (pbegin != pend)
@@ -35,7 +36,22 @@ uint64_t charset_to_int(const unsigned char* pbegin, const unsigned char* pend)
 	return output;
 }
 
-void i64tohex(uint64_t n,char *s)
+static uint64_t charset_to_int2(const unsigned char* pbegin, const unsigned char* pend)
+{
+	uint64_t output = 0;
+	while (pbegin != pend)
+	{
+		const char *ch = strchr(pszBase16, *pbegin);
+		if (ch == NULL)
+            return 404;
+		int carry = ch - pszBase16; //indexof
+		output = output * strlen(pszBase16) + carry;
+		pbegin++;
+	}
+	return output;
+}
+
+static void i64tohex(uint64_t n,char *s)
 {
     char base[16] = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
     uint64_t a = n;
@@ -48,7 +64,7 @@ void i64tohex(uint64_t n,char *s)
 }
 
 //Turn a non-negative integer into a string.
-std::string int_to_charset(uint64_t val)
+static std::string int_to_charset(uint64_t val)
 {
 	if (val < 0)	 return "ERROR";
 	if (val == 0)	 return "0";
@@ -72,7 +88,44 @@ std::string int_to_charset(uint64_t val)
 	return output;
 }
 
-std::string hexpad(std::string val)
+static void i64tohex2(uint64_t n,char *s)
+{   //0123456789abcdefghijklmnopqrstuvwxyz-_.+
+    char base[40] = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','_','.','+'};
+    uint64_t a = n;
+    int i = 0;
+    while(a != 0)
+    {
+        s[i++] = base[a%40];
+        a/=40;
+    }
+}
+
+static std::string int_to_charset2(uint64_t val)
+{
+	if (val < 0)	 return "ERROR";
+	if (val == 0)	 return "0";
+		 
+	std::string output;
+	char a[80] = {0};
+	i64tohex2(val,a);
+	std::string tmp;
+	tmp.assign(a);
+	
+	const char *s1 = tmp.c_str();
+	char b[80] = {0};
+	int p=0;
+	for (int i=(strlen(s1)-1);i>=0;i--)
+	{
+			b[p]=a[i];
+			p++;
+	}
+	
+	output.assign(b);
+	return output;
+}
+
+
+static std::string hexpad(std::string val)
 {
 	std::string output="0";
 	if ((val.length()%2)==1)
@@ -86,7 +139,7 @@ std::string hexpad(std::string val)
 	}
 }
 
-std::string charset_to_hex(const std::vector<unsigned char>& vch)
+static std::string charset_to_hex(const std::vector<unsigned char>& vch)
 {
 	uint64_t intermediate_integer=charset_to_int(&vch[0],&vch[0] + vch.size());
 	
@@ -100,7 +153,7 @@ std::string charset_to_hex(const std::vector<unsigned char>& vch)
 
 
 
-void unhexlify(const std::string &hex, std::vector<unsigned char> &bytes)
+static void unhexlify(const std::string &hex, std::vector<unsigned char> &bytes)
 {
   for (std::size_t i = 0; i < hex.size(); i += 2)
   {
@@ -112,7 +165,7 @@ void unhexlify(const std::string &hex, std::vector<unsigned char> &bytes)
   }
 }
 
-std::string unhexlify(std::string inData)
+static std::string unhexlify(std::string inData)
 {
 	std::vector<unsigned char> vch;
 	unhexlify(inData,vch);

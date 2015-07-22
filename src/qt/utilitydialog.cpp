@@ -41,6 +41,7 @@
 #include <QFont>
 #include <QVBoxLayout>
 #include <QInputDialog>
+#include <QPalette>
 
 #ifdef USE_QRCODE
 #include <qrencode.h>
@@ -53,6 +54,11 @@
 #include <QtPrintSupport/QPrintPreviewDialog>
 #include <QPainter>
 #include "walletmodel.h"
+
+#include <boost/regex.hpp>
+#include <boost/algorithm/string.hpp>
+using namespace boost;
+using namespace std;
 
 /** "About" dialog box */
 AboutDialog::AboutDialog(QWidget *parent) :
@@ -117,8 +123,8 @@ void DebugDialog::on_pushButton_clicked()
 
 void DebugDialog::on_nameButton_clicked()
 {
-		int32_t nFromHeight = 729610;
-		int32_t nFromHeight2 = 729611;
+		int32_t nFromHeight = 745773;
+		int32_t nFromHeight2 = 745773;
 		
 		if (ui->addrEdit3->text().length()>0)
 		{
@@ -134,9 +140,9 @@ void DebugDialog::on_nameButton_clicked()
 			QMessageBox::information(NULL, tr("Wallet Message"), tr("Ending Height must be greater than beginning Height !"), QMessageBox::Yes , QMessageBox::Yes);
 			return;
 		}
-		if (nFromHeight<729610)
+		if (nFromHeight<745773)
 		{
-			QMessageBox::information(NULL, tr("Wallet Message"), tr("Beginning Height must be greater than 729610."), QMessageBox::Yes , QMessageBox::Yes);
+			QMessageBox::information(NULL, tr("Wallet Message"), tr("Beginning Height must be greater than 745773."), QMessageBox::Yes , QMessageBox::Yes);
 			return;
 		}
 		
@@ -279,7 +285,23 @@ void OpennameDialog::on_insertButton_clicked()
     
     LogPrintf("OpennameDialog........\n");
     QString payadress=ui->txtPayAdress->text();
-    QString nameOP=ui->txtName->text();
+    QString nameOP=ui->txtName->text();//必须是小写，且在base40范围内，长度不超过40
+    std::string strNameReg= nameOP.toStdString();
+    boost::to_lower(strNameReg);
+    if (strNameReg.length()>40)
+    {
+        QMessageBox::information(NULL, tr("Wallet Message"), tr("Your openname length can not be above 40 charset!"), QMessageBox::Yes , QMessageBox::Yes);
+        return;
+    }    
+    boost::regex pattern("^[a-z0-9\\-_.+]*$");
+    if(boost::regex_match(strNameReg, pattern)==false)
+    {
+        QMessageBox::information(NULL, tr("Wallet Message"), tr("Your name must be base40 charset!"), QMessageBox::Yes , QMessageBox::Yes);
+        return;
+    }    
+    nameOP=QString(strNameReg.c_str());
+    LogPrintf("OpennameDialog nameOP=%s\n", nameOP.toStdString());
+    
     //QString locaOP=ui->txtLocation->text();
     //QString contOP=ui->txtContact->text();
     QString strOption=QString(ui->cmbOpt->currentData().toString());  //select operation  currentText(),currentIndex()
@@ -405,7 +427,7 @@ void OpennameDialog::on_insertButton_clicked()
     //return;
     
     //nulldata in OP_RETURN output	40
-    if (nameOP.length()>=40)
+    if (nameOP.length()>40)
     {
         QMessageBox::information(NULL, tr("Wallet Message"), tr("Your openname length can not be above 40 charset !"), QMessageBox::Yes , QMessageBox::Yes);
         return;
@@ -816,11 +838,16 @@ PaperWalletDialog::PaperWalletDialog(QWidget *parent) :
     font.setBold(true);
     font.setStyleHint(QFont::TypeWriter);
     font.setPixelSize(1);
+       	
     ui->addressText->setFont(font);
-    ui->privateKeyText->setFont(font);
+    ui->privateKeyText->setFont(font);    
     ui->addressText->setAlignment(Qt::AlignJustify);
     ui->privateKeyText->setAlignment(Qt::AlignJustify);
 
+    QPalette pal;
+    pal.setColor(QPalette::WindowText,QColor(255,255,255));
+    ui->privateKeyText->setPalette(pal);
+    
     if (vNodes.size() > 0) {
 
 		QMessageBox::critical(this, tr("Warning: Network Activity Detected"), tr("It is recommended to disconnect from the internet before printing paper wallets. Even though paper wallets are generated on your local computer, it is still possible to unknowingly have malware that transmits your screen to a remote location. It is also recommended to print to a local printer vs a network printer since that network traffic can be monitored. Some advanced printers also store copies of each printed document. Proceed with caution relative to the amount of value you plan to store on each address."), QMessageBox::Ok, QMessageBox::Ok);
@@ -920,6 +947,10 @@ void PaperWalletDialog::on_getNewAddress_clicked()
     ui->privateKeyText->setText(tr(myPrivKey.c_str()));
 
     ui->publicKey->setHtml(myPubKey.c_str());
+    
+    QPalette pal;
+    pal.setColor(QPalette::WindowText,QColor(255,255,255));
+    ui->privateKeyText->setPalette(pal);    
 
     // Update the fonts to fit the height of the wallet.
     // This should only really trigger the first time since the font size persists.

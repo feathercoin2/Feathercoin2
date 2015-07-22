@@ -16,6 +16,9 @@
 
 #include <stdint.h>
 #include <stdio.h>
+#include <iostream>
+#include <fstream>
+#include <string>
 
 #include <QScrollBar>
 #include <QComboBox>
@@ -32,8 +35,12 @@
 #include <QLabel>
 #include <QDateTimeEdit>
 #include <QFile>
+#include <QDateTime>
 
-#include <boost/filesystem.hpp> 
+#include <boost/filesystem.hpp>
+#include <boost/algorithm/string/replace.hpp>
+#include <boost/algorithm/string/classification.hpp>
+#include <boost/algorithm/string/split.hpp>
 
 using namespace std;
 using namespace boost;
@@ -101,14 +108,16 @@ void NameView::showView()
 	  nameModel->setRowCount(5);
     nameModel->setHorizontalHeaderItem(0, new QStandardItem(tr("Name")));
     nameModel->setHorizontalHeaderItem(1, new QStandardItem(tr("Address")));
-   	nameModel->setHorizontalHeaderItem(2, new QStandardItem(tr("NameHash")));
-    nameModel->setHorizontalHeaderItem(3, new QStandardItem(tr("EffectTime")));
-    nameModel->setHorizontalHeaderItem(4, new QStandardItem(tr("Status")));
+   	nameModel->setHorizontalHeaderItem(2, new QStandardItem(tr("EffectTime")));
+    nameModel->setHorizontalHeaderItem(3, new QStandardItem(tr("Status")));
+    nameModel->setHorizontalHeaderItem(4, new QStandardItem(tr("BlockID")));
+    nameModel->setHorizontalHeaderItem(5, new QStandardItem(tr("TxID")));
     nameView->horizontalHeader()->resizeSection(0, 200);
     nameView->horizontalHeader()->resizeSection(1, 270);
-    nameView->horizontalHeader()->resizeSection(2, 270);
-    nameView->horizontalHeader()->resizeSection(3, 150);
-    nameView->horizontalHeader()->resizeSection(4, 100);
+    nameView->horizontalHeader()->resizeSection(2, 160);
+    nameView->horizontalHeader()->resizeSection(3, 85);
+    nameView->horizontalHeader()->resizeSection(4, 80);
+    nameView->horizontalHeader()->resizeSection(5, 150);
     
     //读取文件nameview\NameView.dat
     QVector<QString> dbName;
@@ -130,6 +139,74 @@ void NameView::showView()
 		}
 		file.close();
     
-    //显示数据
-
+    //显示文件数据
+    //读取文件
+    ifstream ifile(fileName.string().c_str(),ios::in);
+    if(!ifile)
+		{
+			LogPrintf("NameView ifile file error, %s can't open!\n", fileName.string().c_str());  
+			return ;
+		}
+		
+		//读取旧数据，判断是否重复，加入新数据,Block #745773
+		//Name,Address,EffectTime,Status,BlockID,TxID
+		//读取旧数据
+		std::vector<std::string> namelist;
+		std::vector<std::string> addresslist;
+		std::vector<std::string> efftimelist;
+		std::vector<std::string> statuslist;
+		std::vector<std::string> blocklist;
+		std::vector<std::string> txlist;
+		int i=1;
+		std::string temp;
+		bool rf=true;
+		while(rf)
+		{
+			rf=getline(ifile,temp);
+			if (rf)
+			{					
+					//成功读取每个字段
+					std::vector<std::string> vStr;
+					boost::split(vStr,temp,boost::is_any_of(","), boost::token_compress_on);
+					for( vector<string>::iterator it = vStr.begin(); it != vStr.end(); ++ it )
+					{
+						if (i==1)
+							namelist.push_back(*it);
+						if (i==2)
+							addresslist.push_back(*it);
+						if (i==3)
+						{
+							QDateTime dt ;
+							dt.setTimeSpec(Qt::UTC);
+							dt= QDateTime::fromTime_t(atoi(*it));
+							QString strDate = dt.toString(Qt::SystemLocaleLongDate);
+							efftimelist.push_back(strDate.toStdString());
+						}
+						if (i==4)
+							statuslist.push_back(*it);
+						if (i==5)
+							blocklist.push_back(*it);
+						if (i==6)
+						{
+							txlist.push_back(*it);
+							i=0;
+						}
+						i++;
+					}
+			}
+		}
+		ifile.close();
+		LogPrintf("NameView read nameview ok.\n");
+		
+		//显示数据
+		nameModel->setRowCount(namelist.size()+1);
+		for (i=0;i!=namelist.size();++i)
+    { 
+    	nameModel->setItem(i,0,new QStandardItem(QString(namelist.at(i).c_str())));
+    	nameModel->setItem(i,1,new QStandardItem(QString(addresslist.at(i).c_str())));
+    	nameModel->setItem(i,2,new QStandardItem(QString(efftimelist.at(i).c_str())));
+    	nameModel->setItem(i,3,new QStandardItem(QString(statuslist.at(i).c_str())));
+      nameModel->setItem(i,4,new QStandardItem(QString(blocklist.at(i).c_str())));
+      nameModel->setItem(i,5,new QStandardItem(QString(txlist.at(i).c_str())));
+    }
 }

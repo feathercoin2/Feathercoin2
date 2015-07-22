@@ -8,17 +8,23 @@
 #include "crypter.h"
 #include "ui_interface.h"
 #include "base58.h"
+#include "base40.h"
 #include "checkpoints.h"
 #include "coincontrol.h"
 #include "net.h"
 
 #include <iostream>
 #include <fstream>
-#include <boost/filesystem.hpp> 
+#include <string>
+#include <locale.h>
 
+#include <boost/filesystem.hpp> 
 #include <boost/algorithm/string/replace.hpp>
-#include <openssl/rand.h>
 #include <boost/assign/list_of.hpp>
+#include <boost/algorithm/string/classification.hpp>
+#include <boost/algorithm/string/split.hpp>
+
+#include <openssl/rand.h>
 #include "json/json_spirit_utils.h"
 #include "json/json_spirit_value.h"
 
@@ -1987,10 +1993,12 @@ bool CWallet::FindOpennameTransactions(const CTransaction& tx,int BlockHeight,un
 		std::string txid=tx.GetHash().GetHex().c_str();
 		LogPrintf("FindOpennameTransactions() txid=%s,BlockHeight=%d,nTime=%d\n",txid,BlockHeight,nTime); //txid=d99b2df01a65c786df15cbf535987da457e9e17734543e0e416b878347fb3638
 		
+		//feathercoind.exe getrawtransaction 5c2b6d6a794d54625ab1c33b032f2a91ea8bab56e4115e31df2ef61719625d0b 1
 		//LOCK(cs_wallet);
 		opcodetype opCode;
 		std::vector<uint8_t> vchScript;
 		
+		std::string magic;
 		std::string name_op;
 		std::string name_hash;
 		std::string sender;
@@ -2006,28 +2014,58 @@ bool CWallet::FindOpennameTransactions(const CTransaction& tx,int BlockHeight,un
         if (!txout.scriptPubKey.GetOp(itTxA, opCode, vchScript) || opCode != OP_RETURN)
             continue;
 
-        LogPrintf("txout scriptPubKey= %s\n",  txout.scriptPubKey.ToString().c_str()); //OP_RETURN 5808614e493b79ea3501e1323dd77c2722694960406f1d2a9148d8b13939723d2aca16c75c6d68
-        LogPrintf("txout hash = %s\n",  txout.GetHash().GetHex().c_str());  //54d2908165387bd43d620df7db7e21f0d90dd937e164f5813c3195e4c3512d19
+				//OP_RETURN 5808614e493b79ea3501e1323dd77c2722694960406f1d2a9148d8b13939723d2aca16c75c6d68
+				//OP_RETURN 58086208596347ee0d50241a
+        LogPrintf("txout scriptPubKey= %s\n",  txout.scriptPubKey.ToString().c_str()); 
+        LogPrintf("txout hash = %s\n",  txout.GetHash().GetHex().c_str());
         
 				//从tx.vout取出OP_RETURN的内容
 				*itTxA++;//跨过操作符OP_RETURN
         vchScript.assign(itTxA, itTxA + 2);//两个数为一个符
-        std::string magic=HexStr(vchScript).c_str();
+        magic=HexStr(vchScript).c_str();
         LogPrintf("txout magic = %s\n",magic);//magic=5808
         
-        vchScript.assign(itTxA + 2, itTxA + 3);
-        name_op=HexStr(vchScript).c_str();
-        LogPrintf("txout name_op = %s\n",name_op);//name_op=61
-        	
-        vchScript.assign(itTxA + 3, itTxA + 23);
-        name_hash=HexStr(vchScript).c_str();
-        LogPrintf("txout name_hash = %s\n",name_hash);//name_hash=e00414720684e88cb7943fc6751527a94b2e0cdd
-        sendername=name_hash;
-        
-        vchScript.assign(itTxA + 23, itTxA + 39);
-        std::string consensus_hash=HexStr(vchScript).c_str();
-        LogPrintf("txout consensus_hash = %s\n",consensus_hash);//consensus_hash=2a9148d8b13939723d2aca16c75c6d68
+        if (magic=="5808")
+        {
+	        vchScript.assign(itTxA + 2, itTxA + 3);
+	        name_op=HexStr(vchScript).c_str();
+	        LogPrintf("txout name_op = %s\n",name_op);//name_op=61
+	        
+	        if (name_op=="61")
+	        {
+		        vchScript.assign(itTxA + 3, itTxA + 23);
+		        name_hash=HexStr(vchScript).c_str();
+		        LogPrintf("txout name_hash = %s\n",name_hash);//name_hash=e00414720684e88cb7943fc6751527a94b2e0cdd
+		        sendername="";
+		        
+		        vchScript.assign(itTxA + 23, itTxA + 39);
+		        std::string consensus_hash=HexStr(vchScript).c_str();
+		        LogPrintf("txout consensus_hash = %s\n",consensus_hash);//consensus_hash=2a9148d8b13939723d2aca16c75c6d68
+	        }
+	        if (name_op=="62")
+	        {
+	        	 vchScript.assign(itTxA + 3, itTxA + 4);
+	        	 int name_len=atoi(HexStr(vchScript));
+	        	 LogPrintf("txout name_len = %d\n",name_len);
+	        	 vchScript.assign(itTxA + 4, itTxA + 4+ name_len);
+	        	 sendername=HexStr(vchScript).c_str();
+	        	 LogPrintf("txout sendername = %s\n",sendername);//sendername=596347ee0d50241a120015a7,Block# 745773
+
+	        	 //hex_to_charset(sendername, B40_CHARS),596347ee0d50241a
+	        	 const std::vector<unsigned char> vch(sendername.begin(), sendername.end());
+	    			 uint64_t intermediate_integer=charset_to_int2(&vch[0],&vch[0] + vch.size());
+	    			 LogPrintf("txout sendername ,intermediate_integer=%d\n", intermediate_integer);//intermediate_integer=6441070979821085722
+	    			 std::string output_string= int_to_charset2(intermediate_integer); //B40_CHARS
+	    			 LogPrintf("txout sendername,int_to_charset2=%s\n", output_string.c_str());//int_to_charset2=feathercoin2
+	    			 sendername=output_string;
+	        }
+      	}
     }
+    
+    if (magic.compare("5808")!=0)
+    	 return false;
+    if (name_op.compare("62")!=0)
+    	 return false;
     
     //tx = bitcoind.getrawtransaction(tx_hash, 1)
     int32_t nOutputIdInner= -1;
@@ -2047,7 +2085,7 @@ bool CWallet::FindOpennameTransactions(const CTransaction& tx,int BlockHeight,un
         LogPrintf("txin txinAddressN= %d\n", txinAddressN);
         
         //根据txid查找输出信息
-        //feathercoind.exe getrawtransaction 221c32245d87af2f7d82d58a221152a1ba3314187e526803e813f26ca91198c8 1
+        //feathercoind.exe getrawtransaction 01ad709fd217cec325fb102b9f4027fdb3921d5c855570f5225ea4a48f6d1fd7 1
         uint256 hash(pre_txin_id);
         CTransaction tx;
         uint256 hashBlock = 0;
@@ -2081,7 +2119,11 @@ bool CWallet::FindOpennameTransactions(const CTransaction& tx,int BlockHeight,un
       	}
     }
     
+    if (name_op=="62")
+    	name_op="Registered";
+    
     //写文件
+    //setlocale(LC_ALL, "chs");
     boost::filesystem::path pathFile = GetDataDir() / "nameview";
     if(!boost::filesystem::exists(pathFile))
     {
@@ -2089,20 +2131,90 @@ bool CWallet::FindOpennameTransactions(const CTransaction& tx,int BlockHeight,un
     }
     
     boost::filesystem::path fileName = pathFile / "nameview.dat";
-    fstream file(fileName.string().c_str(),ios::in|ios::out|ios::binary);  //打开文件用于写，若文件不存在就创建它
-    if(!file)
+    
+    //读文件
+    ifstream ifile(fileName.string().c_str(),ios::in);
+    if(!ifile)
 		{
-			LogPrintf("FindOpennameTransactions() error, %s can't open!\n", fileName);  
+			LogPrintf("FindOpennameTransactions() ifile file error, %s can't open!\n", fileName.string().c_str());  
 			return false;
 		}
-		//读取旧数据，判断是否重复，加入新数据
-		//Name,Address,NameHash,EffectTime,Status,BlockID,TxID
+		
+		//读取旧数据，判断是否重复，加入新数据,Block #745773
+		//Name,Address,EffectTime,Status,BlockID,TxID
+		//读取旧数据
+		std::vector<std::string> namelist;
+		std::vector<std::string> addresslist;
+		std::vector<std::string> efftimelist;
+		std::vector<std::string> statuslist;
+		std::vector<std::string> blocklist;
+		std::vector<std::string> txlist;
+		int i=1;
+		std::string temp;
+		bool rf=true;
+		while(rf)
+		{
+			rf=getline(ifile,temp);
+			if (rf)
+			{
+					LogPrintf("wallet ifstream=%s\n",temp); 
+					
+					//取每个字段
+					std::vector<std::string> vStr;
+					boost::split(vStr,temp,boost::is_any_of(","), boost::token_compress_on);
+					for( vector<string>::iterator it = vStr.begin(); it != vStr.end(); ++ it )
+					{
+						if (i==1)
+							namelist.push_back(*it);
+						if (i==2)
+							addresslist.push_back(*it);
+						if (i==3)
+							efftimelist.push_back(*it);
+						if (i==4)
+							statuslist.push_back(*it);
+						if (i==5)
+							blocklist.push_back(*it);
+						if (i==6)
+						{
+							txlist.push_back(*it);
+							i=0;
+						}
+						i++;
+					}
+			}
+		}
+		ifile.close();
+		LogPrintf("FindOpennameTransactions() read nameview %s,%s ok\n",name_hash,name_op);
+		
 		//加入新数据,连续数据,需有分割符
-		file.seekg(0,ios::end);
-		file<<sendername<<sender<<name_hash<<nTime<<name_op<<BlockHeight<<txid<<endl;		
-		file.close();
+    ofstream ofile(fileName.string().c_str(),ios::app);  //打开文件用于写，若文件不存在就创建它
+    if(!ofile)
+		{
+			LogPrintf("FindOpennameTransactions() ofile file error, %s can't open!\n", fileName.string().c_str());  
+			return false;
+		}		
+		//Name,Address,EffectTime,Status,BlockID,TxID
+		//ofile.seekg(0,ios::end);
+		int write_flag=1;
+		if (sender.compare("")!=0)
+		{
+			//判断sendername是否重复，不在namelist中存在
+			for (i=0;i!=addresslist.size();++i)
+			{
+				LogPrintf("addresslist.at%d=%s\n",i,addresslist.at(i));
+				if (sender.compare(addresslist.at(i))==0)
+					 write_flag=0;
+			}
+			LogPrintf("write_flag=%d\n",write_flag);
+			if (write_flag==1)
+			{
+				 ofile<<sendername<<sepName<<sender<<sepName<<nTime<<sepName<<name_op<<sepName<<BlockHeight<<sepName<<txid<<endl;
+			}
+			//ofile<<"test"<<endl;
+		}
+		ofile.close();
 		LogPrintf("FindOpennameTransactions() write nameview %s,%s ok\n",name_hash,name_op);
-    	
+    
     return true;
 }
 
