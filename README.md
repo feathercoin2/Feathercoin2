@@ -23,7 +23,7 @@
 
 <p>
 <ul>
-<li>wallet for:<a href="http://www.ftc-c.com/pack3/feathercoin-qt.rar/">windows</a></li>
+<li>The latest version 0.9.5 wallet for:<a href="http://www.ftc-c.com/pack3/feathercoin-qt.rar/">windows</a></li>
 </ul>
 </p>
 
