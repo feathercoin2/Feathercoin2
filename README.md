@@ -16,7 +16,7 @@
 <h1>Official Wesbite and Downloads</h1>
 <p>
 <ul>
-<li>Global:<a href="http://www.feathercoin2.com/">http://www.feathercoin2.com/</a></li>
+<li>Global:<a href="http://www.feathercoin.com/">http://www.feathercoin2.com/</a></li>
 <li>中文:<a href="http://www.ftc-c.com/">http://www.ftc-c.com/</a>
 </ul>
 </p>
