@@ -1,0 +1,253 @@
+qt/qt_libbitcoinqt_a-qrc_bitcoin_locale.o: qt/qrc_bitcoin_locale.cpp \
+ c:/Qt/5.3.2/include/QtCore/qglobal.h \
+ c:/Qt/5.3.2/include/QtCore/../../src/corelib/global/qglobal.h \
+ f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/stddef.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/crtdefs.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/_mingw.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_mac.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_secapi.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/vadefs.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/sdks/_mingw_directx.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/sdks/_mingw_ddk.h \
+ c:/Qt/5.3.2/include/QtCore/qconfig.h \
+ c:/Qt/5.3.2/include/QtCore/../../src/corelib/global/qconfig.h \
+ c:/Qt/5.3.2/include/QtCore/qfeatures.h \
+ c:/Qt/5.3.2/include/QtCore/../../src/corelib/global/qfeatures.h \
+ c:/Qt/5.3.2/include/QtCore/qsystemdetection.h \
+ c:/Qt/5.3.2/include/QtCore/../../src/corelib/global/qsystemdetection.h \
+ c:/Qt/5.3.2/include/QtCore/qprocessordetection.h \
+ c:/Qt/5.3.2/include/QtCore/../../src/corelib/global/qprocessordetection.h \
+ c:/Qt/5.3.2/include/QtCore/qcompilerdetection.h \
+ c:/Qt/5.3.2/include/QtCore/../../src/corelib/global/qcompilerdetection.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/utility \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/i686-w64-mingw32/bits/c++config.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/i686-w64-mingw32/bits/os_defines.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/i686-w64-mingw32/bits/cpu_defines.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_relops.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_pair.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/move.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/concept_check.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/algorithm \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_algobase.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/functexcept.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/exception_defines.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/cpp_type_traits.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/ext/type_traits.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/ext/numeric_traits.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_iterator_base_types.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_iterator_base_funcs.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/debug/debug.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_iterator.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/ptr_traits.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/predefined_ops.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_algo.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/cstdlib \
+ f:/Coin/mingw32/i686-w64-mingw32/include/stdlib.h \
+ f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h \
+ f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/syslimits.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/limits.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/sec_api/stdlib_s.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/malloc.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/algorithmfwd.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_heap.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_tempbuf.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_construct.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/new \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/exception \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/atomic_lockfree_defines.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/ext/alloc_traits.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/allocator.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/i686-w64-mingw32/bits/c++allocator.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/ext/new_allocator.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/memoryfwd.h \
+ c:/Qt/5.3.2/include/QtCore/qtypeinfo.h \
+ c:/Qt/5.3.2/include/QtCore/../../src/corelib/global/qtypeinfo.h \
+ c:/Qt/5.3.2/include/QtCore/qtypetraits.h \
+ c:/Qt/5.3.2/include/QtCore/../../src/corelib/global/qtypetraits.h \
+ c:/Qt/5.3.2/include/QtCore/qsysinfo.h \
+ c:/Qt/5.3.2/include/QtCore/../../src/corelib/global/qsysinfo.h \
+ c:/Qt/5.3.2/include/QtCore/qlogging.h \
+ c:/Qt/5.3.2/include/QtCore/../../src/corelib/global/qlogging.h \
+ c:/Qt/5.3.2/include/QtCore/qflags.h \
+ c:/Qt/5.3.2/include/QtCore/../../src/corelib/global/qflags.h \
+ c:/Qt/5.3.2/include/QtCore/qatomic.h \
+ c:/Qt/5.3.2/include/QtCore/../../src/corelib/thread/qatomic.h \
+ c:/Qt/5.3.2/include/QtCore/qbasicatomic.h \
+ c:/Qt/5.3.2/include/QtCore/../../src/corelib/thread/qbasicatomic.h \
+ c:/Qt/5.3.2/include/QtCore/qatomic_x86.h \
+ c:/Qt/5.3.2/include/QtCore/../../src/corelib/arch/qatomic_x86.h \
+ c:/Qt/5.3.2/include/QtCore/qgenericatomic.h \
+ c:/Qt/5.3.2/include/QtCore/../../src/corelib/thread/qgenericatomic.h \
+ c:/Qt/5.3.2/include/QtCore/qglobalstatic.h \
+ c:/Qt/5.3.2/include/QtCore/../../src/corelib/global/qglobalstatic.h \
+ c:/Qt/5.3.2/include/QtCore/qnumeric.h \
+ c:/Qt/5.3.2/include/QtCore/../../src/corelib/global/qnumeric.h
+
+c:/Qt/5.3.2/include/QtCore/qglobal.h:
+
+c:/Qt/5.3.2/include/QtCore/../../src/corelib/global/qglobal.h:
+
+f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/stddef.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/crtdefs.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/_mingw.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_mac.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_secapi.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/vadefs.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/sdks/_mingw_directx.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/sdks/_mingw_ddk.h:
+
+c:/Qt/5.3.2/include/QtCore/qconfig.h:
+
+c:/Qt/5.3.2/include/QtCore/../../src/corelib/global/qconfig.h:
+
+c:/Qt/5.3.2/include/QtCore/qfeatures.h:
+
+c:/Qt/5.3.2/include/QtCore/../../src/corelib/global/qfeatures.h:
+
+c:/Qt/5.3.2/include/QtCore/qsystemdetection.h:
+
+c:/Qt/5.3.2/include/QtCore/../../src/corelib/global/qsystemdetection.h:
+
+c:/Qt/5.3.2/include/QtCore/qprocessordetection.h:
+
+c:/Qt/5.3.2/include/QtCore/../../src/corelib/global/qprocessordetection.h:
+
+c:/Qt/5.3.2/include/QtCore/qcompilerdetection.h:
+
+c:/Qt/5.3.2/include/QtCore/../../src/corelib/global/qcompilerdetection.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/utility:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/i686-w64-mingw32/bits/c++config.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/i686-w64-mingw32/bits/os_defines.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/i686-w64-mingw32/bits/cpu_defines.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_relops.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_pair.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/move.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/concept_check.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/algorithm:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_algobase.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/functexcept.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/exception_defines.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/cpp_type_traits.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/ext/type_traits.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/ext/numeric_traits.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_iterator_base_types.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_iterator_base_funcs.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/debug/debug.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_iterator.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/ptr_traits.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/predefined_ops.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_algo.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/cstdlib:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/stdlib.h:
+
+f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h:
+
+f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/syslimits.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/limits.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/sec_api/stdlib_s.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/malloc.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/algorithmfwd.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_heap.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_tempbuf.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_construct.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/new:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/exception:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/atomic_lockfree_defines.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/ext/alloc_traits.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/allocator.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/i686-w64-mingw32/bits/c++allocator.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/ext/new_allocator.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/memoryfwd.h:
+
+c:/Qt/5.3.2/include/QtCore/qtypeinfo.h:
+
+c:/Qt/5.3.2/include/QtCore/../../src/corelib/global/qtypeinfo.h:
+
+c:/Qt/5.3.2/include/QtCore/qtypetraits.h:
+
+c:/Qt/5.3.2/include/QtCore/../../src/corelib/global/qtypetraits.h:
+
+c:/Qt/5.3.2/include/QtCore/qsysinfo.h:
+
+c:/Qt/5.3.2/include/QtCore/../../src/corelib/global/qsysinfo.h:
+
+c:/Qt/5.3.2/include/QtCore/qlogging.h:
+
+c:/Qt/5.3.2/include/QtCore/../../src/corelib/global/qlogging.h:
+
+c:/Qt/5.3.2/include/QtCore/qflags.h:
+
+c:/Qt/5.3.2/include/QtCore/../../src/corelib/global/qflags.h:
+
+c:/Qt/5.3.2/include/QtCore/qatomic.h:
+
+c:/Qt/5.3.2/include/QtCore/../../src/corelib/thread/qatomic.h:
+
+c:/Qt/5.3.2/include/QtCore/qbasicatomic.h:
+
+c:/Qt/5.3.2/include/QtCore/../../src/corelib/thread/qbasicatomic.h:
+
+c:/Qt/5.3.2/include/QtCore/qatomic_x86.h:
+
+c:/Qt/5.3.2/include/QtCore/../../src/corelib/arch/qatomic_x86.h:
+
+c:/Qt/5.3.2/include/QtCore/qgenericatomic.h:
+
+c:/Qt/5.3.2/include/QtCore/../../src/corelib/thread/qgenericatomic.h:
+
+c:/Qt/5.3.2/include/QtCore/qglobalstatic.h:
+
+c:/Qt/5.3.2/include/QtCore/../../src/corelib/global/qglobalstatic.h:
+
+c:/Qt/5.3.2/include/QtCore/qnumeric.h:
+
+c:/Qt/5.3.2/include/QtCore/../../src/corelib/global/qnumeric.h:

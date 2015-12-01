@@ -1,0 +1,43 @@
+compat/libbitcoin_util_a-strnlen.o: compat/strnlen.cpp \
+ config/bitcoin-config.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/cstring \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/i686-w64-mingw32/bits/c++config.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/i686-w64-mingw32/bits/os_defines.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/i686-w64-mingw32/bits/cpu_defines.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/string.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/crtdefs.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/_mingw.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_mac.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_secapi.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/vadefs.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/sdks/_mingw_directx.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/sdks/_mingw_ddk.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/sec_api/string_s.h
+
+config/bitcoin-config.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/cstring:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/i686-w64-mingw32/bits/c++config.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/i686-w64-mingw32/bits/os_defines.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/i686-w64-mingw32/bits/cpu_defines.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/string.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/crtdefs.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/_mingw.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_mac.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_secapi.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/vadefs.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/sdks/_mingw_directx.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/sdks/_mingw_ddk.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/sec_api/string_s.h:

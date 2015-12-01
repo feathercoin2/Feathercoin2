@@ -1,0 +1,84 @@
+support/libbitcoin_util_a-cleanse.o: support/cleanse.cpp \
+ support/cleanse.h f:/Coin/mingw32/i686-w64-mingw32/include/stdlib.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/crtdefs.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/_mingw.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_mac.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_secapi.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/vadefs.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/sdks/_mingw_directx.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/sdks/_mingw_ddk.h \
+ f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h \
+ f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/syslimits.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/limits.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/sec_api/stdlib_s.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/malloc.h \
+ f:/Coin/BaseLibs/openssl-1.0.2c/include/openssl/crypto.h \
+ f:/Coin/BaseLibs/openssl-1.0.2c/include/openssl/e_os2.h \
+ f:/Coin/BaseLibs/openssl-1.0.2c/include/openssl/opensslconf.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/stdio.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_print_push.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_off_t.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/swprintf.inl \
+ f:/Coin/mingw32/i686-w64-mingw32/include/sec_api/stdio_s.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_print_pop.h \
+ f:/Coin/BaseLibs/openssl-1.0.2c/include/openssl/stack.h \
+ f:/Coin/BaseLibs/openssl-1.0.2c/include/openssl/safestack.h \
+ f:/Coin/BaseLibs/openssl-1.0.2c/include/openssl/opensslv.h \
+ f:/Coin/BaseLibs/openssl-1.0.2c/include/openssl/ossl_typ.h \
+ f:/Coin/BaseLibs/openssl-1.0.2c/include/openssl/symhacks.h
+
+support/cleanse.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/stdlib.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/crtdefs.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/_mingw.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_mac.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_secapi.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/vadefs.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/sdks/_mingw_directx.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/sdks/_mingw_ddk.h:
+
+f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h:
+
+f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/syslimits.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/limits.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/sec_api/stdlib_s.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/malloc.h:
+
+f:/Coin/BaseLibs/openssl-1.0.2c/include/openssl/crypto.h:
+
+f:/Coin/BaseLibs/openssl-1.0.2c/include/openssl/e_os2.h:
+
+f:/Coin/BaseLibs/openssl-1.0.2c/include/openssl/opensslconf.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/stdio.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_print_push.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_off_t.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/swprintf.inl:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/sec_api/stdio_s.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_print_pop.h:
+
+f:/Coin/BaseLibs/openssl-1.0.2c/include/openssl/stack.h:
+
+f:/Coin/BaseLibs/openssl-1.0.2c/include/openssl/safestack.h:
+
+f:/Coin/BaseLibs/openssl-1.0.2c/include/openssl/opensslv.h:
+
+f:/Coin/BaseLibs/openssl-1.0.2c/include/openssl/ossl_typ.h:
+
+f:/Coin/BaseLibs/openssl-1.0.2c/include/openssl/symhacks.h:

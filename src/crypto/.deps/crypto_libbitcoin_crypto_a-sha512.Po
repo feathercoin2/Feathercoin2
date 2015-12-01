@@ -1,0 +1,72 @@
+crypto/crypto_libbitcoin_crypto_a-sha512.o: crypto/sha512.cpp \
+ crypto/sha512.h \
+ f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdint.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/stdint.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/crtdefs.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/_mingw.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_mac.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_secapi.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/vadefs.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/sdks/_mingw_directx.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/sdks/_mingw_ddk.h \
+ f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/stddef.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/stdlib.h \
+ f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h \
+ f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/syslimits.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/limits.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/sec_api/stdlib_s.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/malloc.h crypto/common.h \
+ ../src/config/bitcoin-config.h compat/endian.h config/bitcoin-config.h \
+ compat/byteswap.h f:/Coin/mingw32/i686-w64-mingw32/include/string.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/sec_api/string_s.h
+
+crypto/sha512.h:
+
+f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdint.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/stdint.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/crtdefs.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/_mingw.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_mac.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_secapi.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/vadefs.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/sdks/_mingw_directx.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/sdks/_mingw_ddk.h:
+
+f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/stddef.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/stdlib.h:
+
+f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h:
+
+f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/syslimits.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/limits.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/sec_api/stdlib_s.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/malloc.h:
+
+crypto/common.h:
+
+../src/config/bitcoin-config.h:
+
+compat/endian.h:
+
+config/bitcoin-config.h:
+
+compat/byteswap.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/string.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/sec_api/string_s.h:

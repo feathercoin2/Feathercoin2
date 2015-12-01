@@ -1,0 +1,1 @@
+libbitcoin_common_a-neoscrypt_asm.o: neoscrypt_asm.S

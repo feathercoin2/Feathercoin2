@@ -1,0 +1,133 @@
+src/libsecp256k1_la-secp256k1.lo: src/secp256k1.c include/secp256k1.h \
+ src/util.h src/libsecp256k1-config.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/stdlib.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/crtdefs.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/_mingw.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_mac.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_secapi.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/vadefs.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/sdks/_mingw_directx.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/sdks/_mingw_ddk.h \
+ f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h \
+ f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/syslimits.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/limits.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/sec_api/stdlib_s.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/malloc.h \
+ f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdint.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/stdint.h \
+ f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/stddef.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/stdio.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_print_push.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_off_t.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/swprintf.inl \
+ f:/Coin/mingw32/i686-w64-mingw32/include/sec_api/stdio_s.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_print_pop.h \
+ src/num_impl.h src/num.h src/field_impl.h src/field_10x26_impl.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/string.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/sec_api/string_s.h src/field.h \
+ src/field_10x26.h src/scalar_impl.h src/group.h src/scalar.h \
+ src/scalar_8x32.h src/scalar_8x32_impl.h src/group_impl.h \
+ src/ecmult_impl.h src/ecmult.h src/ecmult_gen_impl.h src/ecmult_gen.h \
+ src/hash_impl.h src/hash.h src/ecdsa_impl.h src/ecdsa.h src/eckey_impl.h \
+ src/eckey.h
+
+include/secp256k1.h:
+
+src/util.h:
+
+src/libsecp256k1-config.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/stdlib.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/crtdefs.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/_mingw.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_mac.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_secapi.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/vadefs.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/sdks/_mingw_directx.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/sdks/_mingw_ddk.h:
+
+f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h:
+
+f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/syslimits.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/limits.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/sec_api/stdlib_s.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/malloc.h:
+
+f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdint.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/stdint.h:
+
+f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/stddef.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/stdio.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_print_push.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_off_t.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/swprintf.inl:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/sec_api/stdio_s.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_print_pop.h:
+
+src/num_impl.h:
+
+src/num.h:
+
+src/field_impl.h:
+
+src/field_10x26_impl.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/string.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/sec_api/string_s.h:
+
+src/field.h:
+
+src/field_10x26.h:
+
+src/scalar_impl.h:
+
+src/group.h:
+
+src/scalar.h:
+
+src/scalar_8x32.h:
+
+src/scalar_8x32_impl.h:
+
+src/group_impl.h:
+
+src/ecmult_impl.h:
+
+src/ecmult.h:
+
+src/ecmult_gen_impl.h:
+
+src/ecmult_gen.h:
+
+src/hash_impl.h:
+
+src/hash.h:
+
+src/ecdsa_impl.h:
+
+src/ecdsa.h:
+
+src/eckey_impl.h:
+
+src/eckey.h:

@@ -1,0 +1,294 @@
+libbitcoin_util_a-uint256.o: uint256.cpp uint256.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/assert.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/crtdefs.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/_mingw.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_mac.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_secapi.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/vadefs.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/sdks/_mingw_directx.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/sdks/_mingw_ddk.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/stdlib.h \
+ f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h \
+ f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/syslimits.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/limits.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/sec_api/stdlib_s.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/malloc.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/cstring \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/i686-w64-mingw32/bits/c++config.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/i686-w64-mingw32/bits/os_defines.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/i686-w64-mingw32/bits/cpu_defines.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/string.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/sec_api/string_s.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/stdexcept \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/exception \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/atomic_lockfree_defines.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/string \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stringfwd.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/memoryfwd.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/char_traits.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_algobase.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/functexcept.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/exception_defines.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/cpp_type_traits.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/ext/type_traits.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/ext/numeric_traits.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_pair.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/move.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/concept_check.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_iterator_base_types.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_iterator_base_funcs.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/debug/debug.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_iterator.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/ptr_traits.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/predefined_ops.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/postypes.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/cwchar \
+ f:/Coin/mingw32/i686-w64-mingw32/include/wchar.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_print_push.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_off_t.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_stat64.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/swprintf.inl \
+ f:/Coin/mingw32/i686-w64-mingw32/include/sec_api/wchar_s.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_print_pop.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/allocator.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/i686-w64-mingw32/bits/c++allocator.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/ext/new_allocator.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/new \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/localefwd.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/i686-w64-mingw32/bits/c++locale.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/clocale \
+ f:/Coin/mingw32/i686-w64-mingw32/include/locale.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/stdio.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/sec_api/stdio_s.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/iosfwd \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/cctype \
+ f:/Coin/mingw32/i686-w64-mingw32/include/ctype.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/ostream_insert.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/cxxabi_forced.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_function.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/backward/binders.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/range_access.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/basic_string.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/ext/atomicity.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/i686-w64-mingw32/bits/gthr.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/i686-w64-mingw32/bits/gthr-default.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/pthread.h \
+ f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/stddef.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/errno.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/sys/types.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/process.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/signal.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/pthread_signal.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/sys/timeb.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/sec_api/sys/timeb_s.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/pthread_compat.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/pthread_unistd.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/i686-w64-mingw32/bits/atomic_word.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/basic_string.tcc \
+ f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdint.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/stdint.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/vector \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_construct.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/ext/alloc_traits.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_uninitialized.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_vector.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_bvector.h \
+ f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/vector.tcc \
+ utilstrencodings.h
+
+uint256.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/assert.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/crtdefs.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/_mingw.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_mac.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_secapi.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/vadefs.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/sdks/_mingw_directx.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/sdks/_mingw_ddk.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/stdlib.h:
+
+f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/limits.h:
+
+f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include-fixed/syslimits.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/limits.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/sec_api/stdlib_s.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/malloc.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/cstring:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/i686-w64-mingw32/bits/c++config.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/i686-w64-mingw32/bits/os_defines.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/i686-w64-mingw32/bits/cpu_defines.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/string.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/sec_api/string_s.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/stdexcept:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/exception:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/atomic_lockfree_defines.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/string:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stringfwd.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/memoryfwd.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/char_traits.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_algobase.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/functexcept.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/exception_defines.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/cpp_type_traits.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/ext/type_traits.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/ext/numeric_traits.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_pair.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/move.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/concept_check.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_iterator_base_types.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_iterator_base_funcs.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/debug/debug.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_iterator.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/ptr_traits.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/predefined_ops.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/postypes.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/cwchar:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/wchar.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_print_push.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_off_t.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_stat64.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/swprintf.inl:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/sec_api/wchar_s.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/_mingw_print_pop.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/allocator.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/i686-w64-mingw32/bits/c++allocator.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/ext/new_allocator.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/new:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/localefwd.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/i686-w64-mingw32/bits/c++locale.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/clocale:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/locale.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/stdio.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/sec_api/stdio_s.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/iosfwd:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/cctype:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/ctype.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/ostream_insert.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/cxxabi_forced.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_function.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/backward/binders.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/range_access.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/basic_string.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/ext/atomicity.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/i686-w64-mingw32/bits/gthr.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/i686-w64-mingw32/bits/gthr-default.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/pthread.h:
+
+f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include/stddef.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/stddef.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/errno.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/sys/types.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/process.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/signal.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/pthread_signal.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/sys/timeb.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/sec_api/sys/timeb_s.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/pthread_compat.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/pthread_unistd.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/i686-w64-mingw32/bits/atomic_word.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/basic_string.tcc:
+
+f:/Coin/mingw32/lib/gcc/i686-w64-mingw32/4.9.2/include/stdint.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/stdint.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/vector:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_construct.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/ext/alloc_traits.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_uninitialized.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_vector.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/stl_bvector.h:
+
+f:/Coin/mingw32/i686-w64-mingw32/include/c++/bits/vector.tcc:
+
+utilstrencodings.h:
