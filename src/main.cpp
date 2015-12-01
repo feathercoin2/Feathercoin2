@@ -4264,7 +4264,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
             Misbehaving(pfrom->GetId(), 20);
             return error("message inv size() = %u", vInv.size());
         }
-        LogPrintf("\nProcessMessages inv size() = %u \n", vInv.size());
+        //LogPrintf("\nProcessMessages inv size() = %u \n", vInv.size());
 
         LOCK(cs_main);
 

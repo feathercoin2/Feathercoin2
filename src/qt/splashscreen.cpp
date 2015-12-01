@@ -26,7 +26,7 @@ SplashScreen::SplashScreen(Qt::WindowFlags f, const NetworkStyle *networkStyle) 
     QWidget(0, f), curAlignment(0)
 {
     // set reference point, paddings
-    int paddingRight            = 140;
+    int paddingRight            = 180;
     int paddingTop              = 260;
     int titleVersionVSpace      = 13;
     int titleCopyrightVSpace    = 26;
@@ -81,12 +81,12 @@ SplashScreen::SplashScreen(Qt::WindowFlags f, const NetworkStyle *networkStyle) 
         fontFactor = 0.75;
     }
 
-    pixPaint.setFont(QFont(font, 22*fontFactor));
+    pixPaint.setFont(QFont(font, 20*fontFactor));
     fm = pixPaint.fontMetrics();
     titleTextWidth  = fm.width(titleText);
     pixPaint.drawText(pixmap.width()/devicePixelRatio-titleTextWidth-paddingRight,paddingTop,titleText);
 
-    pixPaint.setFont(QFont(font, 14*fontFactor));
+    pixPaint.setFont(QFont(font, 12*fontFactor));
 
     // if the version string is to long, reduce size
     fm = pixPaint.fontMetrics();
