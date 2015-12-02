@@ -1628,7 +1628,7 @@ Optional Packages:
   --with-utils            build bitcoin-cli bitcoin-tx (default=yes)
   --with-libs             build libraries (default=yes)
   --with-daemon           build bitcoind daemon (default=yes)
-  --with-incompatible-bdb allow using a bdb version other than 4.8
+  --with-incompatible-bdb allow using a bdb version other than 6.1
   --with-gui[=no|qt4|qt5|auto]
                           build bitcoin-qt GUI (default=auto, qt4 tried first)
   --with-qt-incdir=INC_DIR
@@ -20534,9 +20534,9 @@ $as_echo_n "checking for Berkeley DB C++ headers... " >&6; }
   BDB_CPPFLAGS=
   BDB_LIBS=
   bdbpath=X
-  bdb48path=X
+  bdb61path=X
   bdbdirlist=
-  for _vn in 4.8 48 4 5 ''; do
+  for _vn in 6.1 61 6 ''; do
     for _pfx in b lib ''; do
       bdbdirlist="$bdbdirlist ${_pfx}db${_vn}"
     done
@@ -20552,8 +20552,8 @@ int
 main ()
 {
 
-      #if !((DB_VERSION_MAJOR == 4 && DB_VERSION_MINOR >= 8) || DB_VERSION_MAJOR > 4)
-        #error "failed to find bdb 4.8+"
+      #if !((DB_VERSION_MAJOR == 6 && DB_VERSION_MINOR >= 1) || DB_VERSION_MAJOR > 6)
+        #error "failed to find bdb 6.1+"
       #endif
 
   ;
@@ -20581,8 +20581,8 @@ int
 main ()
 {
 
-      #if !(DB_VERSION_MAJOR == 4 && DB_VERSION_MINOR == 8)
-        #error "failed to find bdb 4.8"
+      #if !(DB_VERSION_MAJOR == 6 && DB_VERSION_MINOR == 1)
+        #error "failed to find bdb 6.1"
       #endif
 
   ;
@@ -20591,7 +20591,7 @@ main ()
 _ACEOF
 if ac_fn_cxx_try_compile "$LINENO"; then :
 
-      bdb48path="${searchpath}"
+      bdb61path="${searchpath}"
       break
 
 fi
@@ -20600,8 +20600,8 @@ rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
   if test "x$bdbpath" = "xX"; then
     { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
-    as_fn_error $? "libdb_cxx headers missing, Bitcoin Core requires this library for wallet functionality (--disable-wallet to disable wallet functionality)" "$LINENO" 5
-  elif test "x$bdb48path" = "xX"; then
+    as_fn_error $? "libdb_cxx headers missing" "$LINENO" 5
+  elif test "x$bdb61path" = "xX"; then
 
   if test "x${bdbpath}" = "x"; then
     { $as_echo "$as_me:${as_lineno-$LINENO}: result: default" >&5
@@ -20620,22 +20620,22 @@ $as_echo "${newinclpath}" >&6; }
 # Check whether --with-incompatible-bdb was given.
 if test "${with_incompatible_bdb+set}" = set; then :
   withval=$with_incompatible_bdb;
-      { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: Found Berkeley DB other than 4.8; wallets opened by this build will not be portable!" >&5
-$as_echo "$as_me: WARNING: Found Berkeley DB other than 4.8; wallets opened by this build will not be portable!" >&2;}
+      { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: Found Berkeley DB other than 6.1; wallets opened by this build will not be portable!" >&5
+$as_echo "$as_me: WARNING: Found Berkeley DB other than 6.1; wallets opened by this build will not be portable!" >&2;}
 
 else
 
-      as_fn_error $? "Found Berkeley DB other than 4.8, required for portable wallets (--with-incompatible-bdb to ignore or --disable-wallet to disable wallet functionality)" "$LINENO" 5
+      as_fn_error $? "Found Berkeley DB other than 6.1, required for portable wallets (--with-incompatible-bdb to ignore)" "$LINENO" 5
 
 fi
 
   else
 
-  if test "x${bdb48path}" = "x"; then
+  if test "x${bdb61path}" = "x"; then
     { $as_echo "$as_me:${as_lineno-$LINENO}: result: default" >&5
 $as_echo "default" >&6; }
   else
-    echo "#include <${bdb48path}db_cxx.h>" >conftest.cpp
+    echo "#include <${bdb61path}db_cxx.h>" >conftest.cpp
     newinclpath=`${CXXCPP} ${CPPFLAGS} -M conftest.cpp 2>/dev/null |  tr -d '\\n\\r\\\\' | sed -e 's/^.*[[:space:]:]\(\/[^[:space:]]*\)db_cxx\.h[[:space:]].*$/\1/' -e t -e d`
     { $as_echo "$as_me:${as_lineno-$LINENO}: result: ${newinclpath}" >&5
 $as_echo "${newinclpath}" >&6; }
@@ -20644,12 +20644,12 @@ $as_echo "${newinclpath}" >&6; }
     fi
   fi
 
-    bdbpath="${bdb48path}"
+    bdbpath="${bdb61path}"
   fi
 
 
   # TODO: Ideally this could find the library version and make sure it matches the headers being used
-  for searchlib in db_cxx-4.8 db_cxx; do
+  for searchlib in db_cxx-6.1 db_cxx; do
     as_ac_Lib=`$as_echo "ac_cv_lib_$searchlib''_main" | $as_tr_sh`
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for main in -l$searchlib" >&5
 $as_echo_n "checking for main in -l$searchlib... " >&6; }
@@ -20691,7 +20691,7 @@ fi
 
   done
   if test "x$BDB_LIBS" = "x"; then
-      as_fn_error $? "libdb_cxx missing, Bitcoin Core requires this library for wallet functionality (--disable-wallet to disable wallet functionality)" "$LINENO" 5
+      as_fn_error $? "libdb_cxx missing" "$LINENO" 5
   fi
 
 
