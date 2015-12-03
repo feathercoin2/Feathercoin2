@@ -131,8 +131,7 @@ unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nF
         nActualTimespan = nActualTimespanAvg + 3*nTargetTimespan;
         nActualTimespan /= 4;
 
-        LogPrintf("CalculateNextWorkRequired.2 RETARGET: >nForkTwo and <nForkThree nActualTimespanLong = %d, nActualTimeSpanAvg = %d, nActualTimespan (damped) = %d\n",
-          nActualTimespanLong, nActualTimespanAvg, nActualTimespan);
+        //LogPrintf("CalculateNextWorkRequired.2 RETARGET: >nForkTwo and <nForkThree nActualTimespanLong = %d, nActualTimeSpanAvg = %d, nActualTimespan (damped) = %d\n", nActualTimespanLong, nActualTimespanAvg, nActualTimespan);
     }
     
   	//eHRC  
@@ -171,8 +170,7 @@ unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nF
 				nActualTimespan = nActualTimespanAvg + 3*nTargetTimespan;
 				nActualTimespan /= 4;
 				
-				LogPrintf("CalculateNextWorkRequired.3 RETARGET: >nForkThree nActualTimespanShort = %d, nActualTimespanMedium = %d, nActualTimespanLong = %d, nActualTimeSpanAvg = %d, nActualTimespan (damped) = %d\n",
-				nActualTimespanShort, nActualTimespanMedium, nActualTimespanLong, nActualTimespanAvg, nActualTimespan);
+				LogPrintf("CalculateNextWorkRequired.3 RETARGET: >nForkThree nActualTimespanShort = %d, nActualTimespanMedium = %d, nActualTimespanLong = %d, nActualTimeSpanAvg = %d, nActualTimespan (damped) = %d\n",nActualTimespanShort, nActualTimespanMedium, nActualTimespanLong, nActualTimespanAvg, nActualTimespan);
     }
 
     // The initial settings (4.0 difficulty limiter)
@@ -194,8 +192,8 @@ unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nF
     if(nActualTimespan < nActualTimespanMin) nActualTimespan = nActualTimespanMin;
     if(nActualTimespan > nActualTimespanMax) nActualTimespan = nActualTimespanMax;
 
-    LogPrintf("CalculateNextWorkRequired.4 RETARGET: nActualTimespan = %d after bounds\n", nActualTimespan);
-    LogPrintf("CalculateNextWorkRequired.4 RETARGET: nTargetTimespan = %d, nTargetTimespan/nActualTimespan = %.4f\n", nTargetTimespan, (float) nTargetTimespan/nActualTimespan);
+    //LogPrintf("CalculateNextWorkRequired.4 RETARGET: nActualTimespan = %d after bounds\n", nActualTimespan);
+    //LogPrintf("CalculateNextWorkRequired.4 RETARGET: nTargetTimespan = %d, nTargetTimespan/nActualTimespan = %.4f\n", nTargetTimespan, (float) nTargetTimespan/nActualTimespan);
 
 
     // Retarget

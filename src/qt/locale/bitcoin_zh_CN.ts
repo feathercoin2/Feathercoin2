@@ -887,7 +887,7 @@
         <translation>由于这是第一次运行 羽毛币核心 程序，您可以选择数据存储目录。</translation>
     </message>
     <message>
-        <source>Feathercoin Core will download and store a copy of the Bitcoin block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
+        <source>Feathercoin Core will download and store a copy of the Feathercoin block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
         <translation>羽毛币核心 程序会下载储存一份数据块链(blockchain)。至少需要 %1 GB的存储空间，随着时间推移会需要更多的存储空间。钱包文件也储存在该目录。</translation>
     </message>
     <message>

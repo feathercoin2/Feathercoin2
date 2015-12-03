@@ -227,26 +227,9 @@ bool CBlockTreeDB::LoadBlockIndexGuts()
                 pindexNew->hashBlockPoWS   = diskindex.hashBlockPoWS;
                 pindexNew->hashBlockPoWN   = diskindex.hashBlockPoWN;
 
-                //if (!CheckProofOfWork(pindexNew->GetBlockHash(), pindexNew->nBits, Params().GetConsensus()))
-                if (pindexNew->nHeight==0)
+                if (!CheckHeaderProofOfWork(pindexNew->nHeight,pindexNew->hashBlockPoWN,pindexNew->hashBlockPoWS,pindexNew->nBits,Params().GetConsensus()))
                 {
-                	//LogPrintf("LoadBlockIndexGuts(): nHeight=0,pindexNew->hashBlockPoWS=%s\n",pindexNew->hashBlockPoWS.ToString());
-                	//LogPrintf("LoadBlockIndexGuts(): nHeight=0,=%s\n",pindexNew->ToString());
-                	if (!CheckProofOfWork(pindexNew->hashBlockPoWS,pindexNew->nBits, Params().GetConsensus()))
-	                {
-	                    return error("LoadBlockIndexGuts(): CheckProofOfWork failed nHeight=0: %s\n", pindexNew->ToString());
-									}
-                }
-                else
-                {
-		                if (!CheckHeaderProofOfWork(pindexNew->nHeight,pindexNew->hashBlockPoWN,pindexNew->hashBlockPoWS,pindexNew->nBits,Params().GetConsensus()))
-		                {
-		                    return error("LoadBlockIndexGuts(): CheckHeaderProofOfWork failed: %s\n", pindexNew->ToString());
-										}
-										else
-										{
-											 //LogPrintf("LoadBlockIndexGuts(): CheckHeaderProofOfWork true: %s\n", pindexNew->ToString());
-										}
+                    return error("LoadBlockIndexGuts(): CheckHeaderProofOfWork failed: %s\n", pindexNew->ToString());
 								}
                 pcursor->Next();
             } else {

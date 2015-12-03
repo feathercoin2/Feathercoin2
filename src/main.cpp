@@ -1204,7 +1204,8 @@ bool ReadBlockFromDisk(CBlock& block, const CDiskBlockPos& pos)
     // Check the header
     //if (!CheckProofOfWork(block.GetHash(), block.nBits, Params().GetConsensus()))    //0.11 bitcoin
     //if (!block.CheckProofOfWork(mapBlockIndex[block.GetHash()]->nHeight))            //0.9  feathercoin
-    if (!CheckHeaderProofOfWork(mapBlockIndex[block.GetHash()]->nHeight,block.GetHashNeoscrypt(),block.GetHashScrypt(),block.nBits,Params().GetConsensus()))
+    int nHeight=mapBlockIndex[block.GetHash()]->nHeight;
+    if (!CheckHeaderProofOfWork(nHeight,block.GetHashNeoscrypt(),block.GetHashScrypt(),block.nBits,Params().GetConsensus(nHeight)))
         return error("ReadBlockFromDisk: Errors in block header at %s", pos.ToString());
 
     return true;
@@ -1859,12 +1860,8 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
         }
     }
 
-    // BIP16 didn't become active until Apr 1 2012
-    int64_t nBIP16SwitchTime = 1333238400;
-    bool fStrictPayToScriptHash = (pindex->GetBlockTime() >= nBIP16SwitchTime);
-
-    //unsigned int flags = fStrictPayToScriptHash ? SCRIPT_VERIFY_P2SH : SCRIPT_VERIFY_NONE;
    	// Feathercoin: BIP16 has been active since inception
+   	bool fStrictPayToScriptHash =true;
     unsigned int flags = SCRIPT_VERIFY_P2SH;
 
     // Start enforcing the DERSIG (BIP66) rules, for block.nVersion=3 blocks, when 75% of the network has upgraded:
@@ -2776,15 +2773,15 @@ bool CheckBlock(const CBlock& block, CValidationState& state,bool fCheckPOW, boo
 
 bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& state, CBlockIndex * const pindexPrev)
 {
-    const CChainParams& chainParams = Params();
-    const Consensus::Params& consensusParams = chainParams.GetConsensus();
+    const CChainParams& chainParams = Params();    
     uint256 hash = block.GetHash();
-    if (hash == consensusParams.hashGenesisBlock)
+    if (hash == chainParams.GetConsensus(0).hashGenesisBlock)
         return true;
 
     assert(pindexPrev);
 
     int nHeight = pindexPrev->nHeight+1;
+    const Consensus::Params& consensusParams = chainParams.GetConsensus(nHeight);
 
     // Check proof of work
     if (block.nBits != GetNextWorkRequired(pindexPrev, &block, consensusParams))
@@ -2828,22 +2825,26 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
 bool ContextualCheckBlock(const CBlock& block, CValidationState& state, CBlockIndex * const pindexPrev)
 {
     const int nHeight = pindexPrev == NULL ? 0 : pindexPrev->nHeight + 1;
-    const Consensus::Params& consensusParams = Params().GetConsensus();
+    
+    const CChainParams& chainParams = Params();
+    const Consensus::Params& consensusParams = chainParams.GetConsensus(nHeight);
 
     // Check that all transactions are finalized
     BOOST_FOREACH(const CTransaction& tx, block.vtx)
         if (!IsFinalTx(tx, nHeight, block.GetBlockTime())) {
             return state.DoS(10, error("%s: contains a non-final transaction", __func__), REJECT_INVALID, "bad-txns-nonfinal");
         }
-
+   
     // Enforce block.nVersion=2 rule that the coinbase starts with serialized block height
     // if 750 of the last 1,000 blocks are version 2 or greater (51/100 if testnet):
-    if (block.nVersion >= 2 && IsSuperMajority(2, pindexPrev, consensusParams.nMajorityEnforceBlockUpgrade, consensusParams))
+    //if (block.nVersion >= 2 && IsSuperMajority(2, pindexPrev, consensusParams.nMajorityEnforceBlockUpgrade, consensusParams))
+    if (block.nVersion >= 2 && block.nTime > nSwitchV2)
     {
         CScript expect = CScript() << nHeight;
-        if (block.vtx[0].vin[0].scriptSig.size() < expect.size() ||
-            !std::equal(expect.begin(), expect.end(), block.vtx[0].vin[0].scriptSig.begin())) {
-            return state.DoS(100, error("%s: block height mismatch in coinbase", __func__), REJECT_INVALID, "bad-cb-height");
+        //if (block.vtx[0].vin[0].scriptSig.size() < expect.size() || !std::equal(expect.begin(), expect.end(), block.vtx[0].vin[0].scriptSig.begin())) 
+        if(!std::equal(expect.begin(), expect.end(), block.vtx[0].vin[0].scriptSig.begin()))
+        {
+            return state.DoS(100, error("%s: block height mismatch in coinbase", __func__), REJECT_INVALID, "bad-cb-height");           
         }
     }
 
@@ -2881,7 +2882,7 @@ bool AcceptBlockHeader(const CBlockHeader& block, CValidationState& state, CBloc
 
     // Get prev block index
     CBlockIndex* pindexPrev = NULL;
-    if (hash != chainparams.GetConsensus().hashGenesisBlock) {
+    if (hash != chainparams.GetConsensus(0).hashGenesisBlock) {
         BlockMap::iterator mi = mapBlockIndex.find(block.hashPrevBlock);
         if (mi == mapBlockIndex.end())
             return state.DoS(10, error("%s: prev block not found", __func__), 0, "bad-prevblk");
@@ -2917,10 +2918,6 @@ bool AcceptBlock(CBlock& block, CValidationState& state, CBlockIndex** ppindex, 
     {
     		LogPrintf("AcceptBlock AcceptBlockHeader Fail.\n");
         return false;
-    }
-    else
-    {
-    	//LogPrintf("AcceptBlock AcceptBlockHeader OK.\n");
     }
 
     // Try to process all requested blocks that we don't have, but only
@@ -3000,7 +2997,6 @@ bool ProcessNewBlock(CValidationState &state, CNode* pfrom, CBlock* pblock, bool
 {
     // Preliminary checks
     bool checked = CheckBlock(*pblock, state);
-    //bool checked =CheckBlock(*pblock, state, INT_MAX);
 
     {
         LOCK(cs_main);
@@ -3557,7 +3553,7 @@ bool LoadExternalBlockFile(FILE* fileIn, CDiskBlockPos *dbp)
 
                 // detect out of order blocks, and store them for later
                 uint256 hash = block.GetHash();
-                if (hash != chainparams.GetConsensus().hashGenesisBlock && mapBlockIndex.find(block.hashPrevBlock) == mapBlockIndex.end()) {
+                if (hash != chainparams.GetConsensus(0).hashGenesisBlock && mapBlockIndex.find(block.hashPrevBlock) == mapBlockIndex.end()) {
                     LogPrint("reindex", "%s: Out of order block %s, parent %s not known\n", __func__, hash.ToString(),
                             block.hashPrevBlock.ToString());
                     if (dbp)
@@ -3572,7 +3568,7 @@ bool LoadExternalBlockFile(FILE* fileIn, CDiskBlockPos *dbp)
                         nLoaded++;
                     if (state.IsError())
                         break;
-                } else if (hash != chainparams.GetConsensus().hashGenesisBlock && mapBlockIndex[hash]->nHeight % 1000 == 0) {
+                } else if (hash != chainparams.GetConsensus(0).hashGenesisBlock && mapBlockIndex[hash]->nHeight % 1000 == 0) {
                     LogPrintf("Block Import: already had block %s at height %d\n", hash.ToString(), mapBlockIndex[hash]->nHeight);
                 }
 
@@ -3614,7 +3610,6 @@ bool LoadExternalBlockFile(FILE* fileIn, CDiskBlockPos *dbp)
 
 void static CheckBlockIndex()
 {
-    const Consensus::Params& consensusParams = Params().GetConsensus();
     if (!fCheckBlockIndex) {
         return;
     }
@@ -3655,6 +3650,7 @@ void static CheckBlockIndex()
     CBlockIndex* pindexFirstNotChainValid = NULL; // Oldest ancestor of pindex which does not have BLOCK_VALID_CHAIN (regardless of being valid or not).
     CBlockIndex* pindexFirstNotScriptsValid = NULL; // Oldest ancestor of pindex which does not have BLOCK_VALID_SCRIPTS (regardless of being valid or not).
     while (pindex != NULL) {
+    		const Consensus::Params& consensusParams = Params().GetConsensus(nHeight);
         nNodes++;
         if (pindexFirstInvalid == NULL && pindex->nStatus & BLOCK_FAILED_VALID) pindexFirstInvalid = pindex;
         if (pindexFirstMissing == NULL && !(pindex->nStatus & BLOCK_HAVE_DATA)) pindexFirstMissing = pindex;
@@ -3899,8 +3895,8 @@ bool static AlreadyHave(const CInv& inv)
 void static ProcessGetData(CNode* pfrom)
 {
     std::deque<CInv>::iterator it = pfrom->vRecvGetData.begin();
-
     vector<CInv> vNotFound;
+    const Consensus::Params &consensus = Params().GetConsensus(chainActive.Height());
 
     LOCK(cs_main);
 
@@ -3929,7 +3925,7 @@ void static ProcessGetData(CNode* pfrom)
                         // best equivalent proof of work) than the best header chain we know about.
                         send = mi->second->IsValid(BLOCK_VALID_SCRIPTS) && (pindexBestHeader != NULL) &&
                             (pindexBestHeader->GetBlockTime() - mi->second->GetBlockTime() < nOneMonth) &&
-                            (GetBlockProofEquivalentTime(*pindexBestHeader, *mi->second, *pindexBestHeader, Params().GetConsensus()) < nOneMonth);
+                            (GetBlockProofEquivalentTime(*pindexBestHeader, *mi->second, *pindexBestHeader, consensus) < nOneMonth);
                         if (!send) {
                             LogPrintf("%s: ignoring request from peer=%i for old block that isn't in the main chain\n", __func__, pfrom->GetId());
                         }
@@ -4296,24 +4292,13 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                     // not a direct successor.
                     pfrom->PushMessage("getheaders", chainActive.GetLocator(pindexBestHeader), inv.hash);
                     CNodeState *nodestate = State(pfrom->GetId());
-                    
-                    int nHeight=chainActive.Height();
-                    int nTargetSpacing;
-                    if (nHeight >= nForkThree ) {
-								        nTargetSpacing = 60; // 1 minute block
-								    }
-								    else
-								    {
-								    		nTargetSpacing = 150; // // 2.5 minutes block
-								    }
     
-                    if (chainActive.Tip()->GetBlockTime() > GetAdjustedTime() - nTargetSpacing * 20 &&
-                    //if (chainActive.Tip()->GetBlockTime() >  chainparams.GetConsensus().nPowTargetSpacing * 20 &&
+                    if (chainActive.Tip()->GetBlockTime() > GetAdjustedTime() -  chainparams.GetConsensus(chainActive.Height()).nPowTargetSpacing * 20 &&
                         nodestate->nBlocksInFlight < MAX_BLOCKS_IN_TRANSIT_PER_PEER) {
                         vToFetch.push_back(inv);
                         // Mark block as in flight already, even though the actual "getdata" message only goes out
                         // later (within the same cs_main lock, though).
-                        MarkBlockAsInFlight(pfrom->GetId(), inv.hash, chainparams.GetConsensus());
+                        MarkBlockAsInFlight(pfrom->GetId(), inv.hash, chainparams.GetConsensus(chainActive.Height()));
                     }
                     else
                     {
@@ -5032,7 +5017,8 @@ bool ProcessMessages(CNode* pfrom)
 
 bool SendMessages(CNode* pto, bool fSendTrickle)
 {
-    const Consensus::Params& consensusParams = Params().GetConsensus();
+    //const Consensus::Params& consensusParams = Params().GetConsensus();
+    const Consensus::Params& consensusParams = Params().GetConsensus(chainActive.Height());
     {
         // Don't send anything until we get its version message
         if (pto->nVersion == 0)

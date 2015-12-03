@@ -29,6 +29,10 @@ using namespace std;
  */
 
 class CMainParams : public CChainParams {
+	protected:
+    Consensus::Params hardforkThree;
+    Consensus::Params hardforkFour;
+    	
 public:
     CMainParams() {
         strNetworkID = "main";
@@ -41,6 +45,21 @@ public:
         consensus.nPowTargetTimespan = 3.5 * 24 * 60 * 60; // 3.5 days
         consensus.nPowTargetSpacing = 2.5 * 60; // 2.5 minutes
         consensus.fPowAllowMinDifficultyBlocks = false;
+        
+        hardforkThree = consensus;
+        hardforkThree.nHeightEffective = 204639;
+        hardforkThree.nPowTargetTimespan = 60; // 1 minute timespan
+        hardforkThree.nPowTargetTimespan = 60; // 1 minute block
+        
+        hardforkFour = hardforkThree;
+        hardforkFour.nHeightEffective = 432000;
+        hardforkFour.powLimit = uint256S("0000003fffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+        
+        // Assemble the binary search tree of consensus parameters
+        pConsensusRoot = &hardforkThree;
+        hardforkThree.pLeft = &consensus;
+        hardforkThree.pRight = &hardforkFour;
+        
         /**
          * The message start string is designed to be unlikely to occur in normal data.
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
